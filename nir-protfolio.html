@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic meta tags for character encoding and responsive viewport -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Page title reflecting my personal branding -->
+    <title>Nir – Software Developer</title>
+    <!-- Importing Poppins font from Google Fonts for a modern look -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"
+    />
+    <!-- Including Typed.js for animated typing effect in the header -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Including Particles.js for cool background effects in the header -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+      /* Resetting default margins and paddings for consistent styling across browsers */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      /* Setting up the body with Poppins font and a light background color */
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #f7f9fc; /* Light blue-gray for a clean look */
+        color: #2d3748; /* Dark slate for readable text */
+        scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        transition: background 0.5s, color 0.5s; /* Smooth transition for dark mode */
+      }
+      /* Dark mode styles for better contrast at night */
+      body.dark-mode {
+        background: #1a202c; /* Dark gray background */
+        color: #e2e8f0; /* Light gray text for readability */
+      }
+      /* Styling the header as a full-screen section with a gradient background */
+      header {
+        min-height: 100vh; /* Full viewport height */
+        background: linear-gradient(
+          135deg,
+          #2b2d42,
+          #4682b4
+        ); /* Gradient from dark blue to teal */
+        color: #fff; /* White text for contrast */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px 20px;
+        position: relative;
+        overflow: hidden; /* Hide overflow for particles effect */
+      }
+      /* Positioning the particles canvas behind other header content */
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0; /* Ensure particles stay in the background */
+      }
+      /* Styling the main title in the header */
+      header h1 {
+        font-size: 4rem; /* Large font for emphasis */
+        font-weight: 800; /* Bold weight for impact */
+        margin-bottom: 20px;
+        animation: fadeInDown 1s ease-in-out; /* Fade-in animation */
+        z-index: 1; /* Ensure it stays above particles */
+      }
+      /* Styling the subtitle/description in the header */
+      header p {
+        font-size: 1.5rem;
+        max-width: 700px;
+        line-height: 1.8;
+        animation: fadeInUp 1s ease-in-out 0.5s; /* Delayed fade-in animation */
+        opacity: 0;
+        animation-fill-mode: forwards;
+        z-index: 1;
+      }
+
+      /* Styling the navigation bar to be fixed at the top */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98); /* Slightly transparent white */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 12px 0;
+        z-index: 100; /* Ensure nav stays above other content */
+        transition: background 0.5s; /* Smooth transition for dark mode */
+      }
+      /* Dark mode styles for the nav bar */
+      body.dark-mode nav {
+        background: rgba(26, 32, 44, 0.98); /* Dark gray with transparency */
+      }
+      /* Styling the nav links */
+      nav a {
+        text-decoration: none;
+        color: #4682b4; /* Teal color for links */
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 5px;
+        transition: all 0.3s; /* Smooth hover effects */
+      }
+      /* Dark mode color for nav links */
+      body.dark-mode nav a {
+        color: #90cdf4; /* Lighter teal for dark mode */
+      }
+      /* Hover effect for nav links */
+      nav a:hover {
+        background: #4682b4;
+        color: white;
+      }
+      /* Styling the theme toggle button */
+      .theme-toggle {
+        position: absolute;
+        right: 20px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 8px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.1);
+        transition: background 0.3s;
+      }
+      /* Hover effect for theme toggle */
+      .theme-toggle:hover {
+        background: rgba(0, 0, 0, 0.3);
+      }
+      /* General styling for sections */
+      section {
+        padding: 100px 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      /* Styling section titles with an underline effect */
+      .section-title {
+        text-align: center;
+        font-size: 2.8rem;
+        margin-bottom: 60px;
+        color: #2b2d42; /* Dark blue for titles */
+        position: relative;
+        animation: fadeIn 1s ease-in-out;
+      }
+      /* Dark mode color for section titles */
+      body.dark-mode .section-title {
+        color: #90cdf4;
+      }
+      /* Underline effect for section titles */
+      .section-title::after {
+        content: "";
+        width: 60px;
+        height: 4px;
+        background: #4682b4;
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+      /* Styling for project cards */
+      .project {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Subtle shadow for depth */
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover animation */
+        animation: fadeInUp 0.8s ease-in-out;
+        opacity: 0;
+        animation-fill-mode: forwards;
+      }
+      /* Dark mode styles for project cards */
+      body.dark-mode .project {
+        background: #2d3748;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+      /* Hover effect for project cards */
+      .project:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      }
+      /* Project title styling */
+      .project h3 {
+        color: #4682b4;
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+      }
+      /* Dark mode color for project titles */
+      body.dark-mode .project h3 {
+        color: #90cdf4;
+      }
+      /* Project description styling */
+      .project p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+      /* Styling for project links/buttons */
+      .project a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #3182ce; /* Blue button color */
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.3s, transform 0.3s;
+      }
+      /* Hover effect for project links */
+      .project a:hover {
+        background: #2b6cb0;
+        transform: scale(1.05);
+      }
+      /* Grid layout for skills section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+      .project.in-progress {
+        border-left: 6px solid #f6ad55; /* כתום עדין */
+        background-color: #fffaf0; /* רקע קרמי */
+      }
+      body.dark-mode .project.in-progress {
+        background-color: #2d2a1f;
+        border-left-color: #f6ad55;
+      }
+      .view-more-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #3182ce;
+        color: white;
+        font-weight: 600;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.3s, transform 0.3s;
+      }
+      .view-more-btn:hover {
+        background: #2b6cb0;
+        transform: scale(1.05);
+      }
+      body.dark-mode .view-more-btn {
+        background: #4299e1;
+      }
+      body.dark-mode .view-more-btn:hover {
+        background: #2c5282;
+      }
+      /* Styling for individual skill cards */
+      .skill {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+      }
+      /* Dark mode styles for skill cards */
+      body.dark-mode .skill {
+        background: #2d3748;
+      }
+      /* Hover effect for skill cards */
+      .skill:hover {
+        transform: translateY(-5px);
+      }
+      /* Flex layout for the About section to align photo and text */
+      .about-container {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        max-width: 900px;
+        margin: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      /* Container for the profile photo */
+      .profile-photo-container {
+        flex-shrink: 0;
+      }
+      /* Styling the profile photo with a circular shape */
+      .profile-photo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #4682b4; /* Teal border to match theme */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      /* Hover effect for the profile photo */
+      .profile-photo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+      /* Dark mode border color for the profile photo */
+      body.dark-mode .profile-photo {
+        border-color: #90cdf4;
+      }
+      /* Styling the text in the About section */
+      .about-text {
+        flex: 1;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-align: left;
+      }
+      /* Responsive design for the About section on smaller screens */
+      @media (max-width: 768px) {
+        .about-container {
+          flex-direction: column;
+          text-align: center;
+        }
+        .about-text {
+          text-align: center;
+        }
+      }
+      /* Styling the footer */
+      footer {
+        text-align: center;
+        padding: 40px 10px;
+        background: #edf2f7;
+        font-size: 0.95rem;
+        animation: fadeIn 1s ease-in-out;
+      }
+      /* Dark mode styles for the footer */
+      body.dark-mode footer {
+        background: #1a202c;
+      }
+      /* Animation for fading in elements from the top */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Animation for fading in elements from the bottom */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Simple fade-in animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      /* Delaying animations for staggered effects */
+      .project:nth-child(1),
+      .skill:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      .project:nth-child(2),
+      .skill:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+      .project:nth-child(3),
+      .skill:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+      .project:nth-child(4) {
+        animation-delay: 0.8s;
+      }
+      .project:nth-child(5) {
+        animation-delay: 1s;
+      }
+      /* Styling for contact buttons */
+      #contact a i {
+        font-size: 2.4rem;
+        color: inherit;
+        transition: transform 0.3s, color 0.3s;
+      }
+
+      #contact a:hover i {
+        transform: scale(1.2);
+        color: #3182ce;
+      }
+      body.dark-mode .contact-btn {
+        background: #4299e1;
+      }
+      body.dark-mode .contact-btn:hover {
+        background: #2c5282;
+      }
+      .contact-btn svg {
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        fill: white;
+      }
+
+      .nav-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        position: relative;
+      }
+
+      .nav-links {
+        display: flex;
+        justify-content: center;
+        flex: 1;
+      }
+
+      .nav-links a {
+        margin: 0 12px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #4682b4;
+      }
+
+      body.dark-mode .nav-links a {
+        color: #90cdf4;
+      }
+
+      .theme-toggle {
+        margin-left: auto;
+      }
+
+      .burger {
+        display: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+      }
+
+      /* מסכים קטנים */
+      @media (max-width: 600px) {
+        .nav-container {
+          flex-wrap: wrap;
+        }
+
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.98);
+          padding: 15px 0;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.open {
+          display: flex;
+        }
+
+        .burger {
+          display: block;
+        }
+
+        body.dark-mode .nav-links {
+          background: rgba(26, 32, 44, 0.98);
+        }
+        @media (max-width: 600px) {
+          header h1 {
+            font-size: 2rem;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation bar with links to different sections -->
+    <nav>
+      <div class="nav-container">
+        <div class="nav-links" id="nav-links">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="burger" onclick="toggleMenu()">☰</div>
+        <span class="theme-toggle" onclick="toggleTheme()">🌙</span>
+      </div>
+    </nav>
+
+    <!-- Header section with animated title and particles background -->
+    <header>
+      <div id="particles-js"></div>
+      <!-- Placeholder for the animated typing title -->
+      <h1><span id="typed-title"></span></h1>
+
+      <!-- Short intro about myself -->
+      <p>
+        Final-year Computer Science student specializing in Python and Django,
+        passionate about building impactful software solutions.
+      </p>
+    </header>
+
+    <!-- Projects section to showcase my work -->
+    <section id="projects">
+      <h2 class="section-title">Selected Projects</h2>
+
+      <!-- Project card for DevOps Blog -->
+      <div class="project">
+        <h3>DevOps Blog</h3>
+        <p>
+          A blog platform built with Flask where the first registered user
+          becomes admin with permissions to create, edit, and delete posts.
+          Other users can read articles and submit comments. Demonstrates user
+          authentication, authorization, and content management.
+        </p>
+        <a href="https://github.com/Nir41415533/DevOps-Blog" target="_blank"
+          >View on GitHub</a
+        >
+      </div>
+
+      <!-- Project card for Shemaython -->
+      <div class="project">
+        <h3>Shemaython – A Custom Programming Language Interpreter</h3>
+        <p>
+          An interpreter for a custom programming language built in Python. It
+          supports variable declarations, control flow, and custom syntax
+          parsing – built from scratch to better understand compiler
+          fundamentals.
+        </p>
+        <a
+          href="https://github.com/Nir41415533/-Shemaython-A-Custom-Programming-Language-Interpreter-in-Python"
+          target="_blank"
+          >View on GitHub</a
+        >
+      </div>
+
+      <!-- Project card for Client-Server System -->
+      <div class="project">
+        <h3>Client-Server System Shortest Path Finder</h3>
+        <p>
+          A multi-threaded client-server system in C++ that computes the
+          shortest path between two nodes in a graph using BFS. The server loads
+          a graph and handles concurrent client requests via sockets and
+          pthreads. Includes caching for repeated queries.
+        </p>
+        <a
+          href="https://github.com/Nir41415533/Client-Server-System"
+          target="_blank"
+          >View on GitHub</a
+        >
+      </div>
+
+      <!-- Project card for Django Blog Platform -->
+      <div class="project">
+        <h3>Django Blog Platform</h3>
+        <p>
+          A blog platform built with Django, displaying blog posts using Django
+          templates and views. Includes a feature that allows users to bookmark
+          posts they want to read later. Highlights understanding of Django
+          project structure, routing, and template logic.
+        </p>
+        <a href="https://github.com/Nir41415533/django-blog" target="_blank"
+          >View on GitHub</a
+        >
+      </div>
+
+      <!-- Project card for Password Manager -->
+      <div class="project">
+        <h3>Password Manager</h3>
+        <p>
+          A secure password management tool built with Python. It allows users
+          to generate, store, and retrieve encrypted passwords locally through a
+          simple interface.
+        </p>
+        <a
+          href="https://github.com/Nir41415533/Password-Manager"
+          target="_blank"
+          >View on GitHub</a
+        >
+      </div>
+
+      <!-- Project card for WWII Museum Interactive Website -->
+      <div class="project in-progress">
+        <h3>🏛️ WWII Museum Interactive Website (Work in Progress)</h3>
+        <p>
+          Currently developing an interactive website for a World War II museum.
+          Features a visual map for exploring battlefield items, powered by
+          Django with media hosted on Google Drive via API integration. Aims for
+          a clean UI, dynamic filtering, and mobile responsiveness.
+        </p>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px">
+        <a
+          href="https://github.com/Nir41415533?tab=repositories"
+          target="_blank"
+          class="view-more-btn"
+        >
+          And much More →
+        </a>
+      </div>
+    </section>
+
+    <!-- Skills section to highlight my technical abilities -->
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill">
+          <h4>Python</h4>
+          <p>
+            Proficient in scripting, backend development, automation, and
+            interpreter design.
+          </p>
+        </div>
+        <div class="skill">
+          <h4>Java</h4>
+          <p>
+            Solid understanding of object-oriented programming, data structures,
+            and building modular, maintainable Java applications.
+          </p>
+        </div>
+        <div class="skill">
+          <h4>C++ & C</h4>
+          <p>
+            Solid understanding of low-level programming, memory management, and
+            algorithmic problem solving.
+          </p>
+        </div>
+        <div class="skill">
+          <h4>Django</h4>
+          <p>
+            Experience with building scalable web applications, RESTful APIs,
+            and ORM-based database integration.
+          </p>
+        </div>
+        <div class="skill">
+          <h4>Flask</h4>
+          <p>
+            Proficient in building web apps with routing, templates, forms, and
+            database integration using Flask.
+          </p>
+        </div>
+        <div class="skill">
+          <h4>JavaScript</h4>
+          <p>
+            Experience with DOM manipulation, dynamic content rendering, and
+            integrating front-end features.
+          </p>
+        </div>
+        <div class="skill">
+          <h4>SQL</h4>
+          <p>
+            Skilled in designing relational schemas, writing optimized queries,
+            and working with PostgreSQL, SQLite, and MS SQL.
+          </p>
+        </div>
+        <div class="skill">
+          <h4>DevOps: Docker & Jenkins</h4>
+          <p>
+            Familiar with containerization, CI/CD pipelines, and automation of
+            build and deployment processes.
+          </p>
+        </div>
+        <div class="skill">
+          <h4>Git & GitHub</h4>
+          <p>
+            Experienced with version control, branching strategies, and
+            collaborative development workflows.
+          </p>
+        </div>
+        <div class="skill">
+          <h4>Linux</h4>
+          <p>
+            Comfortable working in terminal environments, scripting, and
+            managing development setups on Ubuntu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About section with my photo and a short bio -->
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <div class="about-container">
+        <!-- My profile photo -->
+        <div class="profile-photo-container">
+          <img
+            src="https://media.licdn.com/dms/image/v2/D4D03AQFqu0btdoqypw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1703947850085?e=1748476800&v=beta&t=gR82r27lGH9XfBDk0dwVh_jF6LZm3I8ojcfocxrJnxQ"
+            alt="Profile Photo of Nir"
+            class="profile-photo"
+          />
+        </div>
+        <!-- Text about myself -->
+        <p class="about-text">
+          Hi! I'm Nir, a final-year Computer Science student with a deep passion
+          for building clean, efficient, and meaningful software. I specialize
+          in Python and Django, and have hands-on experience with SQL,
+          JavaScript, and DevOps tools such as Docker and Jenkins. I thrive on
+          solving real-world problems through code, learning new technologies,
+          and collaborating within agile, team-driven environments. Currently,
+          I'm seeking an internship opportunity where I can contribute as a
+          backend or full-stack developer, expand my technical skills, and grow
+          professionally within a forward-thinking company.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact section with styled buttons -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div style="text-align: center; font-size: 2.4rem; margin-top: 20px">
+        <a
+          href="mailto:nir41415511@gmail.com"
+          target="_blank"
+          style="
+            margin: 0 20px;
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+          "
+          aria-label="Email"
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/python-fighter/"
+          target="_blank"
+          style="
+            margin: 0 20px;
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+          "
+          aria-label="LinkedIn"
+        >
+          <i class="fab fa-linkedin"></i>
+        </a>
+
+        <a
+          href="https://github.com/Nir41415533"
+          target="_blank"
+          style="
+            margin: 0 20px;
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+          "
+          aria-label="GitHub"
+        >
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer with a small credit -->
+    <footer>© 2025 Nir Ohayon</footer>
+
+    <script>
+      // Setting up Typed.js for the animated typing effect in the header
+      var typed = new Typed("#typed-title", {
+        strings: [
+          "Nir – Junior Software Developer ",
+          "Final-Year CS Student ",
+          "Specializing in Python, Django & DevOps ",
+          "Exploring Web Technologies, Cloud & CI/CD ",
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true,
+        backDelay: 2000,
+      });
+
+      // Configuring Particles.js for the header background animation
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: { enable: true, speed: 2, direction: "none", random: false },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+
+      // Function to toggle between light and dark modes
+      function toggleTheme() {
+        document.body.classList.toggle("dark-mode");
+        const themeToggle = document.querySelector(".theme-toggle");
+        themeToggle.textContent = document.body.classList.contains("dark-mode")
+          ? "☀️"
+          : "🌙";
+      }
+
+      // Intersection Observer for fade-in animations when scrolling into view
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = 1;
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      // Applying the observer to project cards, skills, and section titles
+      document
+        .querySelectorAll(".project, .skill, .section-title")
+        .forEach((el) => {
+          observer.observe(el);
+        });
+
+      function toggleMenu() {
+        const navLinks = document.getElementById("nav-links");
+        navLinks.classList.toggle("open");
+      }
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.getElementById("nav-links").classList.remove("open");
+        });
+      });
+    </script>
+  </body>
+</html>
