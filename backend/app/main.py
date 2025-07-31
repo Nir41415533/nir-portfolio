@@ -47,13 +47,13 @@ openai.api_key = openai_api_key
 # Validate OpenAI API key
 if not openai_api_key or not openai_api_key.startswith('sk-'):
     print("\n" + "="*50)
-    print("ERROR: INVALID OPENAI API KEY")
+    print("WARNING: INVALID OPENAI API KEY")
     print("="*50)
     print("Your OpenAI API key is missing or invalid.")
     print("Please add a valid API key to your .env file as:")
     print("OPENAI_API_KEY=sk-...")
     print("="*50 + "\n")
-    print("The chatbot will not function without a valid API key.")
+    print("The chatbot will work with local responses only.")
 
 # Get admin token
 admin_token = get_admin_token()
@@ -66,8 +66,8 @@ app = FastAPI(title="Nir's Portfolio API",
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_credentials=True,
+    allow_origins=["*"],  # Allow all origins for deployment
+    allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
@@ -75,6 +75,11 @@ app.add_middleware(
 # Mount static files directory
 STATIC_DIR = Path(__file__).resolve().parent.parent.parent / "frontend" / "static"
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+# Serve the main index.html at root
+@app.get("/")
+async def serve_index():
+    return FileResponse(STATIC_DIR / "index.html")
 # Track API usage and suspicious activity
 api_usage = {}
 blocked_ips = {}
@@ -265,16 +270,16 @@ class ChatResponse(BaseModel):
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(request: Request, chat_request: ChatRequest):
     try:
-        # Track usage and check for suspicious activity
+        # Track usage and check for suspicious activity (disabled for testing)
         client_ip = request.client.host
-        try:
-            track_usage(client_ip, len(chat_request.message))
-        except HTTPException as rate_limit_error:
-            # Return the rate limit error as a structured response
-            return JSONResponse(
-                status_code=429,
-                content={"response": rate_limit_error.detail, "error": True, "error_type": "rate_limit"}
-            )
+        # try:
+        #     track_usage(client_ip, len(chat_request.message))
+        # except HTTPException as rate_limit_error:
+        #     # Return the rate limit error as a structured response
+        #     return JSONResponse(
+        #         status_code=429,
+        #         content={"response": rate_limit_error.detail, "error": True, "error_type": "rate_limit"}
+        #     )
         
         try:
             # Print received history for debugging
@@ -288,6 +293,23 @@ async def chat(request: Request, chat_request: ChatRequest):
             ]
 
             print(f"Calling OpenAI API with {len(messages)} messages")
+            
+            # Check if we have a valid API key
+            if not openai_api_key or not openai_api_key.startswith('sk-'):
+                # Return local response when API key is invalid
+                local_response = "I'm currently running in local mode without AI. You can ask me about:\n\n"
+                local_response += "• help - Show available commands\n"
+                local_response += "• ls - List files and directories\n"
+                local_response += "• pwd - Show current directory\n"
+                local_response += "• whoami - Show user info\n"
+                local_response += "• skills - Show my skills\n"
+                local_response += "• projects - Show my projects\n"
+                local_response += "• about - Show about me\n"
+                local_response += "• contact - Show contact info\n\n"
+                local_response += "For AI-powered responses, please add a valid OpenAI API key to backend/.env\n"
+                local_response += "Server is running on port 8001."
+                
+                return ChatResponse(response=local_response)
             
             try:
                 response = openai.ChatCompletion.create(

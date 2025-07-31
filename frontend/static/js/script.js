@@ -4,9 +4,12 @@ if (typeof typed === 'undefined') {
     const typed = new Typed("#typed-title", {
         strings: [
             "Nir – Junior Software Developer",
-            "Full Stack Developer",
-            "Final-Year CS Student",
-            "Python, Django, Flask, FastAPI,"
+            "Backend Developer",
+            "B.Sc. Computer Science Graduate ",
+            "Python, Django, Flask, FastAPI",
+            "SQL, NoSQL, MongoDB",
+            "Linux, Bash, Git",
+            "CI/CD, Jenkins",
         ],
         typeSpeed: 50,
         backSpeed: 30,

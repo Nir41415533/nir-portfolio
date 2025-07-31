@@ -17,7 +17,7 @@
       href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"
     />
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <style>
       /* Resetting default margins and paddings for consistent styling across browsers */
       * {
@@ -181,12 +181,16 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        border: none;
+        outline: none;
       }
       
       /* Dark mode styles for project cards */
       body.dark-mode .project {
         background: #2d3748;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        border: none;
+        outline: none;
       }
       
       /* Hover effect for project cards */
@@ -202,6 +206,15 @@
         overflow: hidden;
         position: relative;
         cursor: pointer;
+        border: none;
+        outline: none;
+        box-shadow: none;
+      }
+      
+      .project-img-container:focus {
+        outline: none;
+        border: none;
+        box-shadow: none;
       }
       
       /* Project image styling */
@@ -210,6 +223,15 @@
         height: 100%;
         object-fit: cover;
         transition: transform 0.5s ease;
+        border: none;
+        outline: none;
+        box-shadow: none;
+      }
+      
+      .project-img:focus {
+        outline: none;
+        border: none;
+        box-shadow: none;
       }
       
       .project:hover .project-img {
@@ -241,6 +263,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        outline: none;
       }
       
       .project-img-container:hover .img-overlay {
@@ -527,6 +550,105 @@
       .project:nth-child(5) {
         animation-delay: 1s;
       }
+      /* Contact Section Styles */
+      .contact-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .contact-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border: 1px solid #e2e8f0;
+      }
+
+      body.dark-mode .contact-card {
+        background: #2d3748;
+        border-color: #4a5568;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .contact-card i {
+        font-size: 3rem;
+        color: #4682b4;
+        margin-bottom: 20px;
+        transition: transform 0.3s;
+      }
+
+      body.dark-mode .contact-card i {
+        color: #90cdf4;
+      }
+
+      .contact-card:hover i {
+        transform: scale(1.1);
+      }
+
+      .contact-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #2d3748;
+        font-weight: 600;
+      }
+
+      body.dark-mode .contact-card h3 {
+        color: #e2e8f0;
+      }
+
+      .contact-card p {
+        color: #718096;
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+      }
+
+      body.dark-mode .contact-card p {
+        color: #a0aec0;
+      }
+
+      .contact-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #4682b4;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .contact-btn:hover {
+        background: #2b6cb0;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(70, 130, 180, 0.3);
+      }
+
+      body.dark-mode .contact-btn {
+        background: #90cdf4;
+        color: #1a202c;
+      }
+
+      body.dark-mode .contact-btn:hover {
+        background: #63b3ed;
+      }
+
       /* Styling for contact buttons */
       #contact a i {
         font-size: 2.4rem;
@@ -1428,10 +1550,34 @@
       
 
       <div class="projects-grid">
+        <!-- Project card for WWII Museum Interactive Website -->
+        <div class="project">
+          <a href="https://drive.google.com/file/d/1OMX0xA1SwPvKojZ7UCjImVCnOtqHMref/view?pli=1" target="_blank" rel="noopener noreferrer" class="project-img-container">
+            <img src="images/WW2_image.png" alt="WWII Museum Interactive Website" class="project-img">
+            <div class="img-overlay">
+              <span><i class="fas fa-eye"></i> View Demo</span>
+            </div>
+          </a>
+          <div class="project-content">
+            <h3>WWII Museum Interactive Website</h3>
+            <p>
+              Interactive museum site with visual map interface for WWII battlefield artifacts. Built with Django backend, MapLibre GL JS for interactive maps, and Gemini AI for content enrichment. Features bilingual support and mobile optimization.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Django</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">MapLibre GL JS</span>
+              <span class="project-tag">REST API</span>
+              <span class="project-tag">Gemini AI</span>
+              <span class="project-tag">Mobile Optimization</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Project card for Portfolio with AI Chatbot -->
         <div class="project">
           <a href="https://github.com/Nir41415533/nir-portfolio" target="_blank" rel="noopener noreferrer" class="project-img-container">
-            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBvcnRmb2xpb3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="Portfolio with AI Chatbot" class="project-img">
+            <img src="images/nir-protfolio.png" alt="Portfolio with AI Chatbot" class="project-img">
             <div class="img-overlay">
               <span><i class="fas fa-eye"></i> View Project</span>
             </div>
@@ -1535,49 +1681,9 @@
           </div>
         </div>
 
-        <!-- Project card for Password Manager -->
-        <div class="project">
-          <a href="https://github.com/Nir41415533/Password-Manager" target="_blank" rel="noopener noreferrer" class="project-img-container">
-            <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBhc3N3b3JkfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="Password Manager" class="project-img">
-            <div class="img-overlay">
-              <span><i class="fas fa-eye"></i> View Project</span>
-            </div>
-          </a>
-          <div class="project-content">
-            <h3>Password Manager</h3>
-            <p>
-              Secure, locally hosted password manager built with Python. Features strong encryption for password storage, generation of secure passwords, and intuitive retrieval system.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Encryption</span>
-              <span class="project-tag">Local Storage</span>
-            </div>
-          </div>
-        </div>
+    
 
-        <!-- Project card for WWII Museum Interactive Website -->
-        <div class="project in-progress">
-          <div class="in-progress-badge">Work in Progress</div>
-          <div class="project-img-container">
-            <img src="https://images.unsplash.com/photo-1661666501254-b659fa5c13e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8d3d8fGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="WWII Museum Interactive Website" class="project-img">
-            <div class="img-overlay">
-              <span><i class="fas fa-clock"></i> Coming Soon</span>
-            </div>
-          </div>
-          <div class="project-content">
-            <h3>WWII Museum Interactive Website</h3>
-            <p>
-              Interactive museum site with visual map interface for WWII battlefield artifacts. Uses Django backend, Google Drive API for media storage, and features responsive design.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">Django</span>
-              <span class="project-tag">Python</span>
-              <span class="project-tag">API Integration</span>
-              <span class="project-tag">Mobile Responsiveness</span>
-            </div>
-          </div>
-        </div>
+
       </div>
 
       <div style="text-align: center; margin-top: 50px">
@@ -1705,7 +1811,7 @@
         <!-- My profile photo -->
         <div class="profile-photo-container">
           <img
-            src="https://media.licdn.com/dms/image/v2/D4D03AQFqu0btdoqypw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1703947850085?e=1748476800&v=beta&t=gR82r27lGH9XfBDk0dwVh_jF6LZm3I8ojcfocxrJnxQ"
+            src="images/nir_photo.jpeg"
             alt="Profile Photo of Nir"
             class="profile-photo"
             loading="lazy"
@@ -1769,8 +1875,8 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <!-- Custom Scripts -->
-    <script src="/static/js/script.js"></script>
-    <script src="/static/js/chatbot.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/chatbot.js"></script>
     
     <!-- Debug Script -->
     <script>

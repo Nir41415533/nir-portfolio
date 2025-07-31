@@ -11,8 +11,12 @@ const knowledgeBase = {
   certifications: [
     "Information Security Specialization", "Data Science Specialization"
   ],
-  education: "Third-year Computer Science student at SCE College, GPA: 88.",
+  education: "Graduated from SCE - B.Sc. in Computer Science, GPA: 88.",
   projects: [
+    {
+      name: "WWII Interactive Map",
+      description: "A Django-based multilingual platform featuring an interactive map of Jewish soldiers who fought in WWII, integrated with a PostgreSQL database, timeline navigation, and AI-powered search capabilities."
+    },
     {
       name: "Shemaython",
       description: "A custom programming language interpreter supporting logic, loops, strings, and arithmetic."
@@ -43,7 +47,7 @@ const knowledgeBase = {
     "Combat Medic 2016-2019: Medical clinic management and training."
   ],
   languages: ["Hebrew - Native", "English - Fluent"],
-  about: "Highly motivated final-year Computer Science student with a strong passion for software development, backend engineering, and problem-solving. Skilled in Python, Java, Django, and SQL, with additional experience in C, C++, JavaScript, HTML, and CSS. Strong analytical and problem-solving abilities, combined with managerial and interpersonal skills. Experienced in backend and web development, including Django, SQL databases, and API integrations. A fast learner with a mission-driven, independent work ethic, always eager to explore new technologies and contribute to impactful projects. Actively seeking opportunities in software engineering, backend development, and web development. Beyond my work in development and programming, I have a strong interest in socially-driven topics such as making technology more accessible, improving education through tech, and contributing to projects with real-world impact. I'm passionate about using my skills to be part of initiatives that make a meaningful difference in people's lives. For me, technology is not just a tool—it's a way to create value beyond the screen. Feel free to reach out: Nir41415511@gmail.com",
+  about: "Highly motivated graduated Computer Science with a strong passion for software development, backend engineering, and problem-solving. Skilled in Python, Java, Django, and SQL, with additional experience in C, C++, JavaScript, HTML, and CSS. Strong analytical and problem-solving abilities, combined with managerial and interpersonal skills. Experienced in backend and web development, including Django, SQL databases, and API integrations. A fast learner with a mission-driven, independent work ethic, always eager to explore new technologies and contribute to impactful projects. Actively seeking opportunities in software engineering, backend development, and web development. Beyond my work in development and programming, I have a strong interest in socially-driven topics such as making technology more accessible, improving education through tech, and contributing to projects with real-world impact. I'm passionate about using my skills to be part of initiatives that make a meaningful difference in people's lives. For me, technology is not just a tool—it's a way to create value beyond the screen. Feel free to reach out: Nir41415511@gmail.com",
   contact: "Phone: 054-6269965 | Email: nir41415511@gmail.com | LinkedIn: https://linkedin.com/in/python-fighter | GitHub: https://github.com/Nir41415533"
 };
 
@@ -76,22 +80,17 @@ let closeChatbot;
 
 // API endpoint for the backend
 const API_URL = (() => {
-  // First try: Current host with /api/chat
-  const defaultUrl = `${window.location.protocol}//${window.location.host}/api/chat`;
-  
-  // Second try: If we're on a development server, try localhost:5000
-  const localUrl = 'http://localhost:5000/api/chat';
-  
-  console.log(`Debug: Setting API URL to ${defaultUrl}`);
-  console.log(`Debug: Alternative URL is ${localUrl}`);
-  
-  // If we're on localhost with a dev port (like 5173), use the backend URL
-  if (window.location.port === '5173' || window.location.port === '3000') {
-    console.log('Debug: Development environment detected, using localhost:5000');
+  // Check if we're in development (localhost)
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    const localUrl = 'http://localhost:8001/api/chat';
+    console.log(`Debug: Development mode - Using AI server URL: ${localUrl}`);
     return localUrl;
   }
   
-  return defaultUrl;
+  // Production mode - use relative path
+  const productionUrl = '/api/chat';
+  console.log(`Debug: Production mode - Using API URL: ${productionUrl}`);
+  return productionUrl;
 })();
 
 // ----- VIRTUAL FILE SYSTEM -----
@@ -219,8 +218,23 @@ Technologies used: C++, POSIX Threads, Socket Programming, BFS Algorithm`;
 • Error handling with informative messages
 • Interactive command-line environment
 
+
 Technologies used: Python, Abstract Syntax Trees, Interpreter Design Patterns`;
-  } else {
+
+} else if (project.name.includes('WWII Interactive Map')) {
+  detailedInfo = `A multilingual interactive web platform commemorating Jewish soldiers who served in World War II.
+Features include:
+• Interactive Map with MapLibre and GeoJSON
+• Timeline-based navigation and historical event visualization
+• Bilingual UI (Hebrew and English) with flag-based filtering
+• Soldier profiles, event details, and country-based search
+• AI enrichment features for text and metadata
+• Built with Django, PostgreSQL, JavaScript, and Leaflet
+
+Technologies: Django, PostgreSQL, MapLibre, JavaScript, HTML/CSS, AI APIs`;
+}
+
+  else {
     // Generic detailed description for other projects
     detailedInfo = `${project.description}\n\nThis project demonstrates Nir's skills in software development and problem-solving.`;
   }
@@ -571,6 +585,8 @@ What I learned: ${info.learned}`;
     return;
   }
 
+  // Always try to connect to the AI server - no local mode check
+
   // Show typing indicator for API responses
   const typingIndicator = showTypingIndicator();
 
@@ -611,7 +627,7 @@ What I learned: ${info.learned}`;
           // Re-add typing indicator
           chatMessages.appendChild(typingIndicator);
           
-          response = await fetch('http://localhost:5000/api/chat', {
+          response = await fetch('http://localhost:8001/api/chat', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
