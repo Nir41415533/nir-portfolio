@@ -325,6 +325,56 @@
         opacity: 0;
       }
       
+      /* Mobile read more button */
+      .read-more-btn {
+        display: none;
+        background: #4682b4;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .read-more-btn:hover {
+        background: #357abd;
+      }
+      
+      body.dark-mode .read-more-btn {
+        background: #90cdf4;
+        color: #2d3748;
+      }
+      
+      body.dark-mode .read-more-btn:hover {
+        background: #63b3ed;
+      }
+      
+      /* Mobile styles */
+      @media (max-width: 768px) {
+        .project:hover p {
+          max-height: 80px; /* Disable hover effect on mobile */
+        }
+        
+        .project:hover p::after {
+          opacity: 1; /* Keep gradient on mobile */
+        }
+        
+        .read-more-btn {
+          display: block; /* Show read more button on mobile */
+        }
+        
+        .project.expanded p {
+          max-height: none !important;
+        }
+        
+        .project.expanded p::after {
+          opacity: 0 !important;
+        }
+      }
+      
       /* Project tags styling */
       .project-tags {
         display: flex;
@@ -1040,6 +1090,17 @@
           font-size: 16px; /* Prevent zoom on mobile */
         }
         
+        .chatbot-input input:disabled {
+          background-color: #f5f5f5;
+          color: #999;
+          cursor: not-allowed;
+        }
+        
+        .chatbot-input button:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+        
         .chatbot-input button {
           padding: 10px 15px;
           font-size: 14px;
@@ -1509,7 +1570,8 @@
 
       <!-- Short intro about myself -->
       <p>
-        Final-year Computer Science student specializing in backend development with Python, Django, Flask, and FastAPI. Passionate about building robust APIs and scalable systems, with growing skills in DevOps practices.
+        Motivated backend developer and Computer Science graduate with strong expertise in Python, Django, Flask, and FastAPI. Skilled in building clean, efficient, and scalable APIs and backend systems. Brings a proactive mindset, quick learning ability, and strong attention to detail—delivering solutions that are both robust and maintainable. Always eager to take on new challenges and contribute to impactful development teams.
+
 
 
       </p>
@@ -1538,7 +1600,7 @@
         </div>
         <div class="terminal-instructions">
           <p>This terminal provides access to information about Nir's skills and experience.</p>
-          <p>Try terminal commands: <code>help</code>, <code>ls</code>, <code>pwd</code>, <code>cd projects</code>, <code>cd password-manager</code></p>
+          <p>Try terminal commands: <code>help</code>, <code>ls</code>, <code>pwd</code>, <code>cd projects</code>, <code>cd skills</code>, <code>cat about.txt</code></p>
           <p> Ask questions in natural language: <code>Tell me about your Python experience</code> or <code>What projects have you built?</code></p>
         </div>
       </div>
@@ -1566,11 +1628,15 @@
             <div class="project-tags">
               <span class="project-tag">Django</span>
               <span class="project-tag">Python</span>
+              <span class="project-tag">HTML/CSS</span>
+              <span class="project-tag">JavaScript</span>
               <span class="project-tag">MapLibre GL JS</span>
+              <span class="project-tag">MapTiler</span>
+              <span class="project-tag">PostgreesSQL</span>
               <span class="project-tag">REST API</span>
               <span class="project-tag">Gemini AI</span>
-              <span class="project-tag">Mobile Optimization</span>
             </div>
+            <button class="read-more-btn" onclick="toggleProjectDetails(this)">קרא עוד</button>
           </div>
         </div>
 
@@ -1585,14 +1651,17 @@
           <div class="project-content">
             <h3>Portfolio with AI Chatbot</h3>
             <p>
-              Interactive portfolio website featuring a custom AI-powered terminal chatbot. Built with HTML, CSS, and JavaScript, it includes responsive design, dark mode, animated sections, and an integrated AI assistant that can answer questions about my skills and projects.
+              Interactive portfolio website with a custom AI-powered terminal interface. Built with FastAPI on the backend and HTML, CSS, and JavaScript on the frontend, it features a fully responsive design, dark mode, smooth animations, and an integrated AI assistant that answers questions about my skills, experience, and projects in a terminal-like environment.
+
             </p>
             <div class="project-tags">
               <span class="project-tag">HTML/CSS</span>
               <span class="project-tag">JavaScript</span>
-              <span class="project-tag">AI Integration</span>
+              <span class="project-tag">FastAPI</span>
+              <span class="project-tag">OpenAI API</span>
               <span class="project-tag">Responsive Design</span>
             </div>
+            <button class="read-more-btn" onclick="toggleProjectDetails(this)">קרא עוד</button>
           </div>
         </div>
 
@@ -1611,9 +1680,11 @@
             </p>
             <div class="project-tags">
               <span class="project-tag">Flask</span>
+              <span class="project-tag">HTML/CSS</span>
               <span class="project-tag">Python</span>
-              <span class="project-tag">SQL</span>
+              <span class="project-tag">SQLite</span>
             </div>
+            <button class="read-more-btn" onclick="toggleProjectDetails(this)">קרא עוד</button>
           </div>
         </div>
 
@@ -1634,7 +1705,10 @@
               <span class="project-tag">Python</span>
               <span class="project-tag">Compiler</span>
               <span class="project-tag">Syntax Parsing</span>
+              <span class="project-tag">Lexical Analysis</span>
+              <span class="project-tag">Semantic Analysis</span>
             </div>
+            <button class="read-more-btn" onclick="toggleProjectDetails(this)">קרא עוד</button>
           </div>
         </div>
 
@@ -1655,7 +1729,11 @@
               <span class="project-tag">C++</span>
               <span class="project-tag">Multi-threading</span>
               <span class="project-tag">Graph Algorithms</span>
+              <span class="project-tag">BFS</span>
+              <span class="project-tag">Caching</span>
+              <span class="project-tag">Threading</span>
             </div>
+            <button class="read-more-btn" onclick="toggleProjectDetails(this)">קרא עוד</button>
           </div>
         </div>
 
@@ -1675,9 +1753,10 @@
             <div class="project-tags">
               <span class="project-tag">Django</span>
               <span class="project-tag">Python</span>
-              <span class="project-tag">HTML</span>
-              <span class="project-tag">CSS</span>
+              <span class="project-tag">HTML/CSS</span>
+              <span class="project-tag">SQLite</span>
             </div>
+            <button class="read-more-btn" onclick="toggleProjectDetails(this)">קרא עוד</button>
           </div>
         </div>
 
@@ -1763,10 +1842,7 @@
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
             <span>PostgreSQL</span>
           </div>
-          <div class="skill">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
-            <span>MySQL</span>
-          </div>
+        
           <div class="skill">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
             <span>Git</span>
@@ -1819,15 +1895,14 @@
         </div>
         <!-- Text about myself -->
         <p class="about-text">
-          Hi! I'm Nir, a Graduate Computer Science student with a deep passion
-          for building clean, efficient, and meaningful software. I specialize
-          in Python and Django, and have hands-on experience with SQL,
-          JavaScript, and DevOps tools such as Docker and Jenkins. I thrive on
-          solving real-world problems through code, learning new technologies,
-          and collaborating within agile, team-driven environments. Currently,
-          I'm seeking an internship opportunity where I can contribute as a
-          backend or full-stack developer, expand my technical skills, and grow
-          professionally within a forward-thinking company.
+          Hi, I’m Nir , a passionate Computer Science graduate with a focus on backend development, software engineering, and real-world problem-solving. I love turning ideas into scalable systems, and I enjoy building clean, efficient, and impactful web platforms using tools like Python, JavaScript , Java, Django, FastAPI, and PostgreSQL.
+
+          Over the past few years, I’ve gained hands-on experience through academic and independent projects—most notably, leading the development of an interactive WWII map for a museum, where I worked with real data, AI integrations, and modern web technologies to create an engaging educational experience.
+          
+          Alongside my technical work, my background includes leadership and teamwork from my service as a combat medic commander in the IDF reserves. I bring this discipline and responsibility into every project I take on, whether I’m working independently or as part of a team.
+          
+          Outside of development, I enjoy watching football, diving, snowboarding, and staying active. These hobbies keep me grounded, focused, and always ready for the next challenge.
+I thrive in agile, collaborative environments and have a proven ability to integrate APIs, manage data-rich applications, and ship meaningful features under real-world constraints. Whether it’s designing clean RESTful architectures, optimizing queries, or implementing multilingual logic and search filters—I bring both the technical skill and the mindset to deliver quality software. I’m now looking to join a forward-thinking team where I can contribute as a backend or full-stack developer and continue growing through building purposeful, scalable solutions.
         </p>
       </div>
     </section>
@@ -1841,7 +1916,7 @@
             <i class="fas fa-envelope"></i>
             <h3>Email</h3>
             <p>nir41415511@gmail.com</p>
-            <a href="mailto:nir41415511@gmail.com" class="contact-btn">Send Email</a>
+            <a href="https://mail.google.com/mail/?view=cm&to=nir41415511@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-btn">Send Email</a>
           </div>
           <div class="contact-card">
             <i class="fab fa-linkedin"></i>
@@ -1877,6 +1952,27 @@
     <!-- Custom Scripts -->
     <script src="js/script.js"></script>
     <script src="js/chatbot.js"></script>
+    
+    <!-- Mobile Project Details Toggle -->
+    <script>
+      function toggleProjectDetails(button) {
+        const project = button.closest('.project');
+        const description = project.querySelector('p');
+        const isExpanded = project.classList.contains('expanded');
+        
+        if (isExpanded) {
+          // Collapse
+          project.classList.remove('expanded');
+          description.style.maxHeight = '80px';
+          button.textContent = 'קרא עוד';
+        } else {
+          // Expand
+          project.classList.add('expanded');
+          description.style.maxHeight = 'none';
+          button.textContent = 'הצג פחות';
+        }
+      }
+    </script>
     
     <!-- Debug Script -->
     <script>

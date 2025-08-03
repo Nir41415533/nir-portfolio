@@ -5,8 +5,8 @@
 // Knowledge base about Nir
 const knowledgeBase = {
   skills: [
-    "Python", "Django", "JavaScript", "React", "SQL", "MS SQL", "SQLite",
-    "Docker", "Jenkins", "Java", "C", "C++", "Flask","FastApi", "HTML", "CSS"
+    "Python", "JavaScript", "React(Familiar)", "SQL","MongoDB", "SQLite","PostgreSQL",
+    "Docker", "Jenkins", "Java", "C", "C++","Django","Flask","FastApi", "HTML", "CSS"
   ],
   certifications: [
     "Information Security Specialization", "Data Science Specialization"
@@ -43,11 +43,11 @@ const knowledgeBase = {
     }
   ],
   experience: [
-    "Supply Chain Manager at Unilog since 2023: Includes Python automation.",
+    "Global Operations Specialist, ICL, Unilog since 2023: Includes Python automation with Selenium.",
     "Combat Medic 2016-2019: Medical clinic management and training."
   ],
   languages: ["Hebrew - Native", "English - Fluent"],
-  about: "Highly motivated graduated Computer Science with a strong passion for software development, backend engineering, and problem-solving. Skilled in Python, Java, Django, and SQL, with additional experience in C, C++, JavaScript, HTML, and CSS. Strong analytical and problem-solving abilities, combined with managerial and interpersonal skills. Experienced in backend and web development, including Django, SQL databases, and API integrations. A fast learner with a mission-driven, independent work ethic, always eager to explore new technologies and contribute to impactful projects. Actively seeking opportunities in software engineering, backend development, and web development. Beyond my work in development and programming, I have a strong interest in socially-driven topics such as making technology more accessible, improving education through tech, and contributing to projects with real-world impact. I'm passionate about using my skills to be part of initiatives that make a meaningful difference in people's lives. For me, technology is not just a tool—it's a way to create value beyond the screen. Feel free to reach out: Nir41415511@gmail.com",
+  about: "Motivated backend developer and Computer Science graduate with strong expertise in Python, Django, Flask, and FastAPI. Skilled in building clean, efficient, and scalable APIs and backend systems. Brings a proactive mindset, quick learning ability, and strong attention to detail—delivering solutions that are both robust and maintainable. Always eager to take on new challenges and contribute to impactful development teams.",
   contact: "Phone: 054-6269965 | Email: nir41415511@gmail.com | LinkedIn: https://linkedin.com/in/python-fighter | GitHub: https://github.com/Nir41415533"
 };
 
@@ -56,10 +56,10 @@ const projectKnowledge = {
   "portfolio": {
     "name": "Portfolio with AI Chatbot",
     "description": "Interactive portfolio website featuring a custom AI-powered terminal chatbot. Built with HTML, CSS, and JavaScript, it includes responsive design, dark mode, animated sections, and an integrated AI assistant.",
-    "technologies": ["HTML", "CSS", "JavaScript", "FastAPI", "Responsive Design", "AI Integration"],
-    "features": ["AI-powered terminal chatbot", "Dark mode toggle", "Responsive design for all devices", "Animated sections", "Projects showcase", "Skills visualization"],
+    "technologies": ["HTML", "CSS", "JavaScript", "FastAPI", "Responsive Design", "OpenAI API", "Dark Mode", "Animated Sections", "Interactive Terminal", "AI Chatbot"],
+    "features": ["AI-powered terminal chatbot", "Dark mode toggle", "Responsive design for all devices", "Animated sections", "Projects showcase", "Skills visualization",],
     "challenges": "Implementing a responsive terminal interface that works well on all devices and creating a natural language chatbot experience.",
-    "learned": "Advanced CSS techniques, JavaScript DOM manipulation, responsive design patterns, and interactive UI elements."
+    "learned": "Advanced CSS techniques, JavaScript DOM manipulation, responsive design patterns, and interactive UI elements, FastAPI, OpenAI API, AI APIs"
   }
 };
 
@@ -69,6 +69,7 @@ const projectKnowledge = {
 let currentDirectory = '/home/nir';
 let conversationHistory = [];
 let terminalInitialized = false;
+let isAIThinking = false; // Track if AI is currently processing
 
 // DOM elements (will be initialized later)
 let chatMessages;
@@ -100,7 +101,7 @@ const fileSystem = {
   // Root directory
   '/': {
     type: 'dir',
-    contents: ['home', 'etc', 'usr']
+    contents: ['home']
   },
   // Home directory
   '/home': {
@@ -113,7 +114,13 @@ const fileSystem = {
   },
   '/home/nir/about.txt': {
     type: 'file',
-    content: knowledgeBase.about
+    content: `Hi, I'm Nir , a passionate Computer Science graduate with a focus on backend development, software engineering, and real-world problem-solving. I love turning ideas into scalable systems, and I enjoy building clean, efficient, and impactful web platforms using tools like Python, JavaScript , Java, Django, FastAPI, and PostgreSQL.
+
+Over the past few years, I've gained hands-on experience through academic and independent projects—most notably, leading the development of an interactive WWII map for a museum, where I worked with real data, AI integrations, and modern web technologies to create an engaging educational experience.
+
+Alongside my technical work, my background includes leadership and teamwork from my service as a combat medic commander in the IDF reserves. I bring this discipline and responsibility into every project I take on, whether I'm working independently or as part of a team.
+
+Outside of development, I enjoy watching football, diving, snowboarding, and staying active. These hobbies keep me grounded, focused, and always ready for the next challenge.`
   },
   '/home/nir/projects': {
     type: 'dir',
@@ -148,13 +155,14 @@ knowledgeBase.projects.forEach(project => {
   };
 });
 
-// Add skill files dynamically
+// Add skill files dynamically (but they won't be accessible via cat)
 knowledgeBase.skills.forEach(skill => {
   const skillName = skill.toLowerCase();
   const filename = '/home/nir/skills/' + skillName;
   fileSystem[filename] = {
     type: 'file',
-    content: `Skill: ${skill}\nLevel: Advanced\nYears: ${Math.floor(Math.random() * 5) + 1}`
+    content: `Skill: ${skill}\nLevel: Advanced\nYears: ${Math.floor(Math.random() * 5) + 1}`,
+    hidden: true // Mark as hidden so cat won't work on it
   };
 });
 
@@ -165,7 +173,7 @@ function getProjectDetails(project) {
   let detailedInfo = '';
   
   if (project.name.includes('Portfolio with AI Chatbot')) {
-    detailedInfo = `Interactive portfolio website featuring a custom AI-powered terminal chatbot. Features include:
+    detailedInfo = `Interactive portfolio website featuring a custom AI-powered using OpenAI API ,terminal chatbot. Features include:
 • Modern and responsive design with dark/light mode
 • Interactive terminal-style AI assistant
 • Animated sections and transitions
@@ -173,16 +181,22 @@ function getProjectDetails(project) {
 • Skills visualization organized by categories
 • Mobile-first approach for all screen sizes
 
-Technologies used: HTML, CSS, JavaScript, FastAPI, Responsive Design, AI Integration`;
-  } else if (project.name.includes('Password Manager')) {
-    detailedInfo = `A secure password management application built with Python. Features include:
-• AES-256 encryption for storing sensitive credentials
-• Random secure password generation with customizable parameters
-• Local storage with encrypted backup functionality
-• Command-line interface with intuitive navigation
-• Protection against brute force attacks
+Technologies used: HTML, CSS, JavaScript, FastAPI, OpenAI API, Responsive Design, AI Integration`;
 
-Technologies used: Python, Cryptography libraries, SQLite for local storage`;
+ 
+} else if (project.name.includes('WWII Interactive Map')) {
+  detailedInfo = `A multilingual interactive web platform commemorating Jewish soldiers who served in World War II , built for the Musuem of the Jewish Soldiers in World War II.
+Features include:
+• Interactive Map with MapLibre and GeoJSON
+• MapTiler for map tiles
+• 30,000+ soldiers data
+• Timeline-based navigation and historical event visualization
+• Bilingual UI (Hebrew and English) with flag-based filtering
+• Soldier profiles, event details, and country-based search
+• AI enrichment (Gemini API) features for text and metadata
+• Built with Django, PostgreSQL, JavaScript, HTML/CSS
+
+Technologies: Django, PostgreSQL, MapLibre, MapTiler, JavaScript, HTML/CSS, Gemini API, GeoJSON`;
   } else if (project.name.includes('Django Blog')) {
     detailedInfo = `A feature-rich blog platform developed with Django framework. Features include:
 • User authentication and role-based permissions
@@ -191,7 +205,7 @@ Technologies used: Python, Cryptography libraries, SQLite for local storage`;
 • Comment system with moderation tools
 • Responsive design for mobile and desktop views
 
-Technologies used: Django, Python, PostgreSQL, HTML/CSS, JavaScript`;
+Technologies used: Django, Python, SQLite, HTML/CSS`;
   } else if (project.name.includes('DevOps Blog')) {
     detailedInfo = `A Flask-based blog platform with administrator privileges. Features include:
 • First registered user automatically gains admin permissions
@@ -200,40 +214,41 @@ Technologies used: Django, Python, PostgreSQL, HTML/CSS, JavaScript`;
 • Comment system with threading support
 • Mobile-responsive design
 
-Technologies used: Flask, Python, SQLite, Bootstrap, JavaScript`;
+Technologies used: Flask, Python, SQLite, Bootstrap`;
   } else if (project.name.includes('Client-Server')) {
     detailedInfo = `A multi-threaded network system implemented in C++. Features include:
 • Concurrent connection handling with thread pooling
 • TCP/IP socket communication
-• Efficient graph pathfinding algorithm implementation
+• Multi-threading
+• BFS algorithm for pathfinding
 • Request caching for improved performance
-• Memory-safe implementation with proper resource management
+• Efficient graph pathfinding algorithm implementation
 
-Technologies used: C++, POSIX Threads, Socket Programming, BFS Algorithm`;
+Technologies used: C++, Socket Programming, BFS Algorithm, Caching, Multi-threading`;
   } else if (project.name.includes('Shemaython')) {
     detailedInfo = `A custom programming language interpreter built from scratch. Features include:
 • Lexical analysis and parsing of custom syntax
+• Syntactic analysis and semantic analysis
 • Support for variables, loops, conditionals, and functions
 • String manipulation and arithmetic operations
 • Error handling with informative messages
 • Interactive command-line environment
 
 
-Technologies used: Python, Abstract Syntax Trees, Interpreter Design Patterns`;
 
-} else if (project.name.includes('WWII Interactive Map')) {
-  detailedInfo = `A multilingual interactive web platform commemorating Jewish soldiers who served in World War II.
-Features include:
-• Interactive Map with MapLibre and GeoJSON
-• Timeline-based navigation and historical event visualization
-• Bilingual UI (Hebrew and English) with flag-based filtering
-• Soldier profiles, event details, and country-based search
-• AI enrichment features for text and metadata
-• Built with Django, PostgreSQL, JavaScript, and Leaflet
+Technologies used: Python, Abstract Syntax Trees, Interpreter Design Patterns, Parsing, Lexical Analysis, Syntactic Analysis, Testing, Debugging`;
 
-Technologies: Django, PostgreSQL, MapLibre, JavaScript, HTML/CSS, AI APIs`;
+
+} else if (project.name.includes('Password Manager')) {
+  detailedInfo = `A secure password management application built with Python. Features include:
+• AES-256 encryption for storing sensitive credentials
+• Random secure password generation with customizable parameters
+• Local storage with encrypted backup functionality
+• Command-line interface with intuitive navigation
+• Protection against brute force attacks
+
+Technologies used: Python, Cryptography libraries, SQLite for local storage`;
 }
-
   else {
     // Generic detailed description for other projects
     detailedInfo = `${project.description}\n\nThis project demonstrates Nir's skills in software development and problem-solving.`;
@@ -275,6 +290,24 @@ const responses = {
       return "ls: cannot access '" + currentDirectory + "': No such file or directory";
     } else {
       if (fileSystem[currentDirectory] && fileSystem[currentDirectory].type === 'dir') {
+        // Special formatting for skills directory
+        if (currentDirectory === '/home/nir/skills') {
+          return fileSystem[currentDirectory].contents.map((f, index) => {
+            return `• ${f}`;
+          }).join('\n');
+        }
+        
+        // Special formatting for home directory
+        if (currentDirectory === '/home/nir') {
+          const contents = fileSystem[currentDirectory].contents.map(f => {
+            const path = currentDirectory + '/' + f;
+            const isDir = fileSystem[path] && fileSystem[path].type === 'dir';
+            return isDir ? f + '/' : f;
+          }).join('  ');
+          
+          return `${contents}\n\n📁 Available directories:\n• projects/ - View my portfolio projects\n• skills/ - See my technical skills\n• about.txt - Read about me\n\n Tip: Try: cd projects or cd skills or cat about.txt`;
+        }
+        
         // Format display to show directories with trailing slash
         return fileSystem[currentDirectory].contents.map(f => {
           const path = currentDirectory + '/' + f;
@@ -291,6 +324,23 @@ const responses = {
     if (!args) {
       currentDirectory = '/home/nir';
       return `Changed to: ${currentDirectory}`; // Give feedback about the new directory
+    }
+    
+    // Handle 'cd all' command to show all projects
+    if (args === 'all') {
+      if (currentDirectory === '/home/nir/projects') {
+        let allProjectsInfo = 'All Projects:\n\n';
+        
+        knowledgeBase.projects.forEach((project, index) => {
+          const detailedInfo = getProjectDetails(project);
+          allProjectsInfo += `=== ${index + 1}. ${project.name} ===\n`;
+          allProjectsInfo += `${detailedInfo}\n\n`;
+        });
+        
+        return allProjectsInfo;
+      } else {
+        return 'cd all: Command only works in /home/nir/projects directory. Use "cd projects" first.';
+      }
     }
     
     // Handle relative paths
@@ -339,6 +389,16 @@ const responses = {
         return `Project: ${project.name}\n\n${detailedInfo}\n\nCurrent directory: ${currentDirectory}`;
       }
       
+      // Add helpful instructions when entering projects directory
+      if (targetPath === '/home/nir/projects') {
+        return `Changed to: ${currentDirectory}\n\n📁 Available commands:\n• ls - List all projects\n• cd all - Show all projects with details\n• cd [project-name] - View specific project\n\n💡 Tip: Try "cd all" to see all projects at once!`;
+      }
+      
+      // Add helpful instructions when entering skills directory
+      if (targetPath === '/home/nir/skills') {
+        return `Changed to: ${currentDirectory}\n\n💻 Available commands:\n• ls - List all skills\n• cd .. - Return to home directory\n\n💡 Tip: Try "ls" to see all available skills!`;
+      }
+      
       return `Changed to: ${currentDirectory}`; // Give feedback about the new directory
     }
     
@@ -384,8 +444,8 @@ const responses = {
     // Normalize path
     filePath = filePath.replace(/\/+/g, '/');
     
-    // Check if file exists
-    if (fileSystem[filePath] && fileSystem[filePath].type === 'file') {
+    // Check if file exists and is not hidden
+    if (fileSystem[filePath] && fileSystem[filePath].type === 'file' && !fileSystem[filePath].hidden) {
       return fileSystem[filePath].content;
     }
     
@@ -408,7 +468,7 @@ languages    View languages Nir speaks
 
 Terminal commands:
 ------------------
-ls           List files in current directory
+ls           List files in current directory (try ls -la for more details)
 pwd          Print working directory
 cd [dir]     Change directory (try cd projects)
 cat [file]   Display file contents (try cat about.txt)
@@ -418,11 +478,13 @@ whoami       Display current user
 
 Project navigation:
 ------------------
-cd projects                   Go to projects directory
-cd portfolio-with-ai-chatbot  View details about this portfolio website
-cd password-manager           View details of the Password Manager project
+cd projects                   Go to projects directory (then use commands below)
+cd all                        Show all projects with detailed information
+cd [project-name]             View specific project (e.g., cd portfolio-with-ai-chatbot)
 ls                            List available projects
 cd ..                         Return to previous directory
+
+💡 Quick start: cd projects → cd all (to see everything!)
 
 Free questions:
 ------------------
@@ -477,12 +539,37 @@ function showTypingIndicator() {
   return typingIndicator;
 }
 
+// Function to disable input during AI thinking
+function disableInput() {
+  isAIThinking = true;
+  userInput.disabled = true;
+  sendButton.disabled = true;
+  userInput.placeholder = 'AI is thinking...';
+  userInput.style.opacity = '0.6';
+  sendButton.style.opacity = '0.6';
+}
+
+// Function to enable input after AI response
+function enableInput() {
+  isAIThinking = false;
+  userInput.disabled = false;
+  sendButton.disabled = false;
+  userInput.placeholder = 'Type your message...';
+  userInput.style.opacity = '1';
+  sendButton.style.opacity = '1';
+}
+
 // ----- MESSAGE HANDLING -----
 
 // Function to handle user input
 async function handleUserInput() {
   const message = userInput.value.trim();
   if (!message) return;
+
+  // Check if AI is already thinking
+  if (isAIThinking) {
+    return; // Don't allow new messages while AI is thinking
+  }
 
   // Add user message to chat
   addMessage(message, 'user');
@@ -585,6 +672,9 @@ What I learned: ${info.learned}`;
     return;
   }
 
+  // Disable input before making API call
+  disableInput();
+
   // Always try to connect to the AI server - no local mode check
 
   // Show typing indicator for API responses
@@ -681,6 +771,9 @@ What I learned: ${info.learned}`;
         // Other types of errors
         addMessage(data.response, 'error');
       }
+      
+      // Enable input after error
+      enableInput();
       return;
     }
     
@@ -705,6 +798,9 @@ What I learned: ${info.learned}`;
     }
     
     console.log("Debug: Updated history:", conversationHistory);
+    
+    // Enable input after successful response
+    enableInput();
 
   } catch (error) {
     console.error('Error:', error);
@@ -736,6 +832,9 @@ What I learned: ${info.learned}`;
       // Show user-friendly error message
       addMessage(`שגיאה: ${error.message}`, 'error');
     }
+    
+    // Enable input after error
+    enableInput();
   } finally {
     // Always focus the input field after a message is sent
     userInput.focus();
@@ -822,7 +921,8 @@ function initializeTerminal() {
   // Boot sequence messages
   const bootMessages = [
     "Welcome to Nir's interactive terminal!",
-    "Type 'help' for commands or ask me any question about Nir."
+    "Type 'help' for commands or ask me any question about Nir.",
+    "Tip: Try: 'ls' to see all available directories"
   ];
   
   // Display boot sequence with delays

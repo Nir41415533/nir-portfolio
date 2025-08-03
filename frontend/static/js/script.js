@@ -3,13 +3,14 @@ if (typeof typed === 'undefined') {
     // Initialize Typed.js
     const typed = new Typed("#typed-title", {
         strings: [
-            "Nir – Junior Software Developer",
-            "Backend Developer",
-            "B.Sc. Computer Science Graduate ",
-            "Python, Django, Flask, FastAPI",
-            "SQL, NoSQL, MongoDB",
-            "Linux, Bash, Git",
-            "CI/CD, Jenkins",
+            "Nir Ohayon",
+            "Backend / Full Stack Developer",
+            "Passionate About Clean, Scalable Code",
+            "B.Sc. Computer Science (SCE, 2025)",
+            "Python • Django • Flask • FastAPI",
+            "SQL • PostgreSQL • MongoDB • SQLite",
+            "Linux • Bash • Git • Docker",
+            "Always Learning | Quick Learner",
         ],
         typeSpeed: 50,
         backSpeed: 30,
