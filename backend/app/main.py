@@ -72,14 +72,53 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files directory
-STATIC_DIR = Path(__file__).resolve().parent.parent.parent / "frontend" / "static"
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+# Mount static files directory - try multiple locations
+STATIC_DIR = None
+possible_paths = [
+    Path(__file__).resolve().parent.parent.parent / "frontend" / "static",  # Original path
+    Path(__file__).resolve().parent.parent / "frontend" / "static",        # Backend relative path
+    Path(__file__).resolve().parent.parent / "static",                      # Direct static path
+]
+
+for path in possible_paths:
+    if path.exists():
+        STATIC_DIR = path
+        print(f"Found static files at: {STATIC_DIR}")
+        break
+
+if STATIC_DIR:
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+else:
+    print("WARNING: No static files directory found!")
 
 # Serve the main index.html at root
 @app.get("/")
 async def serve_index():
-    return FileResponse(STATIC_DIR / "index.html")
+    if not STATIC_DIR:
+        return JSONResponse(
+            status_code=404,
+            content={
+                "message": "Frontend files not found. Please ensure the frontend/static directory is included in the deployment.",
+                "api_endpoints": {
+                    "chat": "/api/chat",
+                    "usage": "/api/usage"
+                }
+            }
+        )
+    
+    try:
+        return FileResponse(STATIC_DIR / "index.html")
+    except FileNotFoundError:
+        return JSONResponse(
+            status_code=404,
+            content={
+                "message": "index.html not found in static directory.",
+                "api_endpoints": {
+                    "chat": "/api/chat",
+                    "usage": "/api/usage"
+                }
+            }
+        )
 # Track API usage and suspicious activity
 api_usage = {}
 blocked_ips = {}
