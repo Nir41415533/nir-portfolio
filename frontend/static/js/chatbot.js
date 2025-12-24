@@ -8,40 +8,40 @@ const knowledgeBase = {
     "Python", "JavaScript", "React Native (Expo)", "React", "SQL", "PostgreSQL", 
     "Docker", "Java", "C", "C++", "Django", "Flask", "FastAPI", "HTML", "CSS", 
     "AWS", "Git", "Jira", "Linux", "Bash", "Selenium", "AI Agent Collaboration", "Gemini API"
-  ], [cite: 7, 8, 11, 14, 15, 17, 21, 23]
-  certifications: [
-    "Cyber Security Specialization (GPA: 88)" [cite: 16]
   ],
-  education: "B.Sc. in Computer Science, SCE Engineering College (2022–2025). Graduated with honors, specialized in Cyber Security.", [cite: 15, 16]
+  certifications: [
+    "Cyber Security Specialization (GPA: 88)"
+  ],
+  education: "B.Sc. in Computer Science, SCE Engineering College (2022–2025). Graduated with honors, specialized in Cyber Security.",
   projects: [
     {
-      name: "WWII Interactive Map & Timeline", [cite: 20]
-      award: "Awarded Dean’s Honor Project", [cite: 20]
-      status: "Currently displayed at the Jewish Soldier Museum", [cite: 22]
-      description: "A full-stack bilingual platform managing 34k+ historical records. Built with Django, JavaScript, and PostgreSQL, featuring dynamic map layers (MapLibre/MapTiler) and AI-enriched data via Gemini API." [cite: 21, 23]
+      name: "WWII Interactive Map & Timeline",
+      award: "Awarded Dean’s Honor Project",
+      status: "Currently displayed at the Jewish Soldier Museum",
+      description: "A full-stack bilingual platform managing 34k+ historical records. Built with Django, JavaScript, and PostgreSQL, featuring dynamic map layers (MapLibre/MapTiler) and AI-enriched data via Gemini API."
     }
   ],
   experience: [
     {
-      role: "React Native Developer Intern, Effective Therapy R&D (2025–Present)", [cite: 7]
-      highlights: "Developing an AI-powered mental health app, translating Figma designs to UI, and managing state/API flows in an Agile/Docker environment." [cite: 8, 9, 10, 11]
+      role: "React Native Developer Intern, Effective Therapy R&D (2025–Present)",
+      highlights: "Developing an AI-powered mental health app, translating Figma designs to UI, and managing state/API flows in an Agile/Docker environment."
     },
     {
-      role: "Global Operations Specialist, Unilog (2023–Present)", [cite: 12]
-      highlights: "Automating logistics workflows using Python and Selenium, developing internal web tools for shipment tracking and reporting." [cite: 14]
+      role: "Global Operations Specialist, Unilog (2023–Present)",
+      highlights: "Automating logistics workflows using Python and Selenium, developing internal web tools for shipment tracking and reporting."
     },
     {
-      role: "Combat Medic, IDF (2016–2019)", [cite: 25]
-      highlights: "Responsible for medical readiness and field treatment for over 140 soldiers." [cite: 26]
+      role: "Combat Medic, IDF (2016–2019)",
+      highlights: "Responsible for medical readiness and field treatment for over 140 soldiers."
     }
   ],
-  languages: ["Hebrew - Native", "English - Proficient"], [cite: 27]
-  about: "Computer Science graduate (GPA 88) and Software Developer specializing in Mobile and Backend systems. Experienced in React Native, Python (Django, FastAPI), and AI integration. Proven track record in building scalable applications, from AI-driven health platforms to national museum databases, with a strong focus on clean code and code-agent collaboration.", [cite: 3, 4, 7, 14, 15, 16, 21]
+  languages: ["Hebrew - Native", "English - Proficient"],
+  about: "Computer Science graduate (GPA 88) and Software Developer specializing in Mobile and Backend systems. Experienced in React Native, Python (Django, FastAPI), and AI integration. Proven track record in building scalable applications, from AI-driven health platforms to national museum databases, with a strong focus on clean code and code-agent collaboration.",
   contact: {
-    phone: "054-6269965", [cite: 2]
-    email: "nir41415511@gmail.com", [cite: 2]
-    linkedIn: "https://linkedin.com/in/niroha", [cite: 2]
-    github: "https://github.com/Nir41415533" [cite: 2]
+    phone: "054-6269965",
+    email: "nir41415511@gmail.com",
+    linkedIn: "https://linkedin.com/in/niroha",
+    github: "https://github.com/Nir41415533"
   }
 };
 
