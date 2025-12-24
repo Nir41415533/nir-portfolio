@@ -4,13 +4,18 @@ if (typeof typed === 'undefined') {
     const typed = new Typed("#typed-title", {
         strings: [
             "Nir Ohayon",
-            "Backend / Full Stack Developer",
-            "Passionate About Clean, Scalable Code",
-            "B.Sc. Computer Science (SCE, 2025)",
-            "Python • Django • Flask • FastAPI",
-            "SQL • PostgreSQL • MongoDB • SQLite",
-            "Linux • Bash • Git • Docker",
-            "Always Learning | Quick Learner",
+        // שילוב הטייטל הנוכחי שלך עם השאיפות
+        "Full Stack & Mobile Developer",
+        // הדגשת הסטאק החזק ביותר שלך (מה שיש לך ניסיון מוכח בו)
+        "React Native • Python • Django",
+        // הדגשת הניסיון המיוחד שלך באינטגרציות AI
+        "Building AI-Powered Applications",
+        // התואר וההישגים
+        "B.Sc. Computer Science Graduate (GPA 88)",
+        // כלי ה-DevOps שציינת בקו"ח
+        "Linux • Docker • Git • CI/CD",
+        // במקום "לומד מהר", משהו שמעיד על תשוקה לטכנולוגיה ופתרון בעיות
+        "Turning Coffee into Clean Code ☕",
         ],
         typeSpeed: 50,
         backSpeed: 30,

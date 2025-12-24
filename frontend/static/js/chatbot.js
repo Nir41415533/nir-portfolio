@@ -5,61 +5,53 @@
 // Knowledge base about Nir
 const knowledgeBase = {
   skills: [
-    "Python", "JavaScript", "React(Familiar)", "SQL","MongoDB", "SQLite","PostgreSQL",
-    "Docker", "Jenkins", "Java", "C", "C++","Django","Flask","FastApi", "HTML", "CSS"
+    "Python", "JavaScript", "React Native (Expo)", "React", "SQL", "PostgreSQL", 
+    "Docker", "Java", "C", "C++", "Django", "Flask", "FastAPI", "HTML", "CSS", 
+    "AWS", "Git", "Jira", "Linux", "Bash", "Selenium", "AI Agent Collaboration", "Gemini API"
   ],
   certifications: [
-    "Information Security Specialization", "Data Science Specialization"
+    "Cyber Security Specialization (GPA: 88)"
   ],
-  education: "Graduated from SCE - B.Sc. in Computer Science, GPA: 88.",
+  education: "B.Sc. in Computer Science, SCE Engineering College (2022–2025). Graduated with honors, specialized in Cyber Security.",
   projects: [
     {
-      name: "WWII Interactive Map",
-      description: "A Django-based multilingual platform featuring an interactive map of Jewish soldiers who fought in WWII, integrated with a PostgreSQL database, timeline navigation, and AI-powered search capabilities."
-    },
-    {
-      name: "Shemaython",
-      description: "A custom programming language interpreter supporting logic, loops, strings, and arithmetic."
-    },
-    {
-      name: "Portfolio with AI Chatbot",
-      description: "An interactive portfolio website featuring a custom AI-powered terminal chatbot."
-    },
-    {
-      name: "Client-Server System",
-      description: "A multi-threaded client-server system in C++ with concurrent connections and TCP/IP communication."
-    },
-    {
-      name: "DevOps Blog",
-      description: "A Flask-based blog with admin permissions for the first registered user."
-    },
-    {
-      name: "Django Blog Platform",
-      description: "A blog platform with bookmarking features and content management."
-    },
-    {
-      name: "Password Manager",
-      description: "A secure password management tool built with Python."
+      name: "WWII Interactive Map & Timeline",
+      award: "Awarded Dean’s Honor Project",
+      status: "Currently displayed at the Jewish Soldier Museum",
+      description: "A full-stack bilingual platform managing 34k+ historical records. Built with Django, JavaScript, and PostgreSQL, featuring dynamic map layers (MapLibre/MapTiler) and AI-enriched data via Gemini API."
     }
   ],
   experience: [
-    "Global Operations Specialist, ICL, Unilog since 2023: Includes Python automation with Selenium.",
-    "Combat Medic 2016-2019: Medical clinic management and training."
+    {
+      role: "React Native Developer Intern, Effective Therapy R&D (2025–Present)",
+      highlights: "Developing an AI-powered mental health app, translating Figma designs to UI, and managing state/API flows in an Agile/Docker environment."
+    },
+    {
+      role: "Global Operations Specialist, Unilog (2023–Present)",
+      highlights: "Automating logistics workflows using Python and Selenium, developing internal web tools for shipment tracking and reporting."
+    },
+    {
+      role: "Combat Medic, IDF (2016–2019)",
+      highlights: "Responsible for medical readiness and field treatment for over 140 soldiers."
+    }
   ],
-  languages: ["Hebrew - Native", "English - Fluent"],
-  about: "Motivated backend developer and Computer Science graduate with strong expertise in Python, Django, Flask, and FastAPI. Skilled in building clean, efficient, and scalable APIs and backend systems. Brings a proactive mindset, quick learning ability, and strong attention to detail—delivering solutions that are both robust and maintainable. Always eager to take on new challenges and contribute to impactful development teams.",
-  contact: "Phone: 054-6269965 | Email: nir41415511@gmail.com | LinkedIn: https://linkedin.com/in/python-fighter | GitHub: https://github.com/Nir41415533"
+  languages: ["Hebrew - Native", "English - Proficient"],
+  about: "Computer Science graduate (GPA 88) and Software Developer specializing in Mobile and Backend systems. Experienced in React Native, Python (Django, FastAPI), and AI integration. Proven track record in building scalable applications, from AI-driven health platforms to national museum databases, with a strong focus on clean code and code-agent collaboration.",
+  contact: {
+    phone: "054-6269965",
+    email: "nir41415511@gmail.com",
+    linkedIn: "https://linkedin.com/in/niroha",
+    github: "https://github.com/Nir41415533"
+  }
 };
 
-// Project knowledge - detailed information about portfolio projects
 const projectKnowledge = {
   "portfolio": {
-    "name": "Portfolio with AI Chatbot",
-    "description": "Interactive portfolio website featuring a custom AI-powered terminal chatbot. Built with HTML, CSS, and JavaScript, it includes responsive design, dark mode, animated sections, and an integrated AI assistant.",
-    "technologies": ["HTML", "CSS", "JavaScript", "FastAPI", "Responsive Design", "OpenAI API", "Dark Mode", "Animated Sections", "Interactive Terminal", "AI Chatbot"],
-    "features": ["AI-powered terminal chatbot", "Dark mode toggle", "Responsive design for all devices", "Animated sections", "Projects showcase", "Skills visualization",],
-    "challenges": "Implementing a responsive terminal interface that works well on all devices and creating a natural language chatbot experience.",
-    "learned": "Advanced CSS techniques, JavaScript DOM manipulation, responsive design patterns, and interactive UI elements, FastAPI, OpenAI API, AI APIs"
+    "name": "AI-Powered Portfolio",
+    "description": "Personal portfolio featuring a custom terminal-style AI chatbot.",
+    "technologies": ["HTML", "CSS", "JavaScript", "FastAPI", "OpenAI API", "Responsive Design"],
+    "features": ["Interactive Terminal Interface", "AI Chatbot Integration", "Dark Mode", "Animated UI"],
+    "learned": "Advanced DOM manipulation, API integration, and responsive CSS architecture."
   }
 };
 
@@ -80,19 +72,8 @@ let chatbotContainer;
 let closeChatbot;
 
 // API endpoint for the backend
-const API_URL = (() => {
-  // Check if we're in development (localhost)
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    const localUrl = 'http://localhost:8001/api/chat';
-    console.log(`Debug: Development mode - Using AI server URL: ${localUrl}`);
-    return localUrl;
-  }
-  
-  // Production mode - use relative path
-  const productionUrl = '/api/chat';
-  console.log(`Debug: Production mode - Using API URL: ${productionUrl}`);
-  return productionUrl;
-})();
+const API_URL = '/api/chat';
+console.log(`Debug: Using API URL: ${API_URL}`);
 
 // ----- VIRTUAL FILE SYSTEM -----
 
@@ -142,13 +123,13 @@ knowledgeBase.projects.forEach(project => {
     contents: ['readme.md', 'description.txt'],
     projectData: project // Store the project data for easy access
   };
-  
+
   // Add project files
   fileSystem[dirPath + '/readme.md'] = {
     type: 'file',
     content: `# ${project.name}\n\n${project.description}`
   };
-  
+
   fileSystem[dirPath + '/description.txt'] = {
     type: 'file',
     content: project.description
@@ -171,7 +152,7 @@ knowledgeBase.skills.forEach(skill => {
 // Function to get detailed project information
 function getProjectDetails(project) {
   let detailedInfo = '';
-  
+
   if (project.name.includes('Portfolio with AI Chatbot')) {
     detailedInfo = `Interactive portfolio website featuring a custom AI-powered using OpenAI API ,terminal chatbot. Features include:
 • Modern and responsive design with dark/light mode
@@ -183,9 +164,9 @@ function getProjectDetails(project) {
 
 Technologies used: HTML, CSS, JavaScript, FastAPI, OpenAI API, Responsive Design, AI Integration`;
 
- 
-} else if (project.name.includes('WWII Interactive Map')) {
-  detailedInfo = `A multilingual interactive web platform commemorating Jewish soldiers who served in World War II , built for the Musuem of the Jewish Soldiers in World War II.
+
+  } else if (project.name.includes('WWII Interactive Map')) {
+    detailedInfo = `A multilingual interactive web platform commemorating Jewish soldiers who served in World War II , built for the Musuem of the Jewish Soldiers in World War II.
 Features include:
 • Interactive Map with MapLibre and GeoJSON
 • MapTiler for map tiles
@@ -239,8 +220,8 @@ Technologies used: C++, Socket Programming, BFS Algorithm, Caching, Multi-thread
 Technologies used: Python, Abstract Syntax Trees, Interpreter Design Patterns, Parsing, Lexical Analysis, Syntactic Analysis, Testing, Debugging`;
 
 
-} else if (project.name.includes('Password Manager')) {
-  detailedInfo = `A secure password management application built with Python. Features include:
+  } else if (project.name.includes('Password Manager')) {
+    detailedInfo = `A secure password management application built with Python. Features include:
 • AES-256 encryption for storing sensitive credentials
 • Random secure password generation with customizable parameters
 • Local storage with encrypted backup functionality
@@ -248,12 +229,12 @@ Technologies used: Python, Abstract Syntax Trees, Interpreter Design Patterns, P
 • Protection against brute force attacks
 
 Technologies used: Python, Cryptography libraries, SQLite for local storage`;
-}
+  }
   else {
     // Generic detailed description for other projects
     detailedInfo = `${project.description}\n\nThis project demonstrates Nir's skills in software development and problem-solving.`;
   }
-  
+
   return detailedInfo;
 }
 
@@ -272,15 +253,15 @@ const responses = {
   military: `Military Service:\n\n${knowledgeBase.experience.find(e => e.includes("Medic"))}`,
   languages: `Languages:\n\n${knowledgeBase.languages.map(lang => `• ${lang}`).join('\n')}`,
   clear: "Terminal cleared. Ready for new commands.",
-  
+
   // ls command
-  ls: function(args = '') {
+  ls: function (args = '') {
     if (args.includes('-la') || args.includes('-l')) {
       if (fileSystem[currentDirectory] && fileSystem[currentDirectory].type === 'dir') {
         const files = fileSystem[currentDirectory].contents;
         if (files.length === 0) return "total 0";
-        
-        return `total ${files.length}\ndrwxr-xr-x  2 nir  nir  4096 Jun 15 10:30 .\ndrwxr-xr-x  5 nir  nir  4096 Jun 15 10:30 ..\n` + 
+
+        return `total ${files.length}\ndrwxr-xr-x  2 nir  nir  4096 Jun 15 10:30 .\ndrwxr-xr-x  5 nir  nir  4096 Jun 15 10:30 ..\n` +
           files.map(f => {
             const path = currentDirectory + '/' + f;
             const isDir = fileSystem[path] && fileSystem[path].type === 'dir';
@@ -296,7 +277,7 @@ const responses = {
             return `• ${f}`;
           }).join('\n');
         }
-        
+
         // Special formatting for home directory
         if (currentDirectory === '/home/nir') {
           const contents = fileSystem[currentDirectory].contents.map(f => {
@@ -304,10 +285,10 @@ const responses = {
             const isDir = fileSystem[path] && fileSystem[path].type === 'dir';
             return isDir ? f + '/' : f;
           }).join('  ');
-          
+
           return `${contents}\n\n📁 Available directories:\n• projects/ - View my portfolio projects\n• skills/ - See my technical skills\n• about.txt - Read about me\n\n Tip: Try: cd projects or cd skills or cat about.txt`;
         }
-        
+
         // Format display to show directories with trailing slash
         return fileSystem[currentDirectory].contents.map(f => {
           const path = currentDirectory + '/' + f;
@@ -318,31 +299,31 @@ const responses = {
       return "ls: cannot access '" + currentDirectory + "': No such file or directory";
     }
   },
-  
+
   // cd command
-  cd: function(args = '') {
+  cd: function (args = '') {
     if (!args) {
       currentDirectory = '/home/nir';
       return `Changed to: ${currentDirectory}`; // Give feedback about the new directory
     }
-    
+
     // Handle 'cd all' command to show all projects
     if (args === 'all') {
       if (currentDirectory === '/home/nir/projects') {
         let allProjectsInfo = 'All Projects:\n\n';
-        
+
         knowledgeBase.projects.forEach((project, index) => {
           const detailedInfo = getProjectDetails(project);
           allProjectsInfo += `=== ${index + 1}. ${project.name} ===\n`;
           allProjectsInfo += `${detailedInfo}\n\n`;
         });
-        
+
         return allProjectsInfo;
       } else {
         return 'cd all: Command only works in /home/nir/projects directory. Use "cd projects" first.';
       }
     }
-    
+
     // Handle relative paths
     let targetPath = args;
     if (args.startsWith('/')) {
@@ -371,66 +352,66 @@ const responses = {
       // Path relative to current
       targetPath = (currentDirectory === '/' ? '' : currentDirectory) + '/' + args;
     }
-    
+
     // Normalize path (remove double slashes)
     targetPath = targetPath.replace(/\/+/g, '/');
-    
+
     // Check if the target exists and is a directory
     if (fileSystem[targetPath] && fileSystem[targetPath].type === 'dir') {
       currentDirectory = targetPath;
-      
+
       // Check if this is a project directory and display project info
       if (targetPath.includes('/projects/') && fileSystem[targetPath].projectData) {
         const project = fileSystem[targetPath].projectData;
-        
+
         // Create a more detailed description based on the project type
         let detailedInfo = getProjectDetails(project);
-        
+
         return `Project: ${project.name}\n\n${detailedInfo}\n\nCurrent directory: ${currentDirectory}`;
       }
-      
+
       // Add helpful instructions when entering projects directory
       if (targetPath === '/home/nir/projects') {
         return `Changed to: ${currentDirectory}\n\n📁 Available commands:\n• ls - List all projects\n• cd all - Show all projects with details\n• cd [project-name] - View specific project\n\n💡 Tip: Try "cd all" to see all projects at once!`;
       }
-      
+
       // Add helpful instructions when entering skills directory
       if (targetPath === '/home/nir/skills') {
         return `Changed to: ${currentDirectory}\n\n💻 Available commands:\n• ls - List all skills\n• cd .. - Return to home directory\n\n💡 Tip: Try "ls" to see all available skills!`;
       }
-      
+
       return `Changed to: ${currentDirectory}`; // Give feedback about the new directory
     }
-    
+
     // Check if user is trying to cd into a project file (without proper path)
     if (currentDirectory === '/home/nir/projects') {
       // Check if they're trying to access a .md file directly
       const projectName = args.replace(/\.md$/, ''); // Remove .md extension if present
       const dirPath = currentDirectory + '/' + projectName;
-      
+
       if (fileSystem[dirPath] && fileSystem[dirPath].type === 'dir') {
         currentDirectory = dirPath;
         const project = fileSystem[dirPath].projectData;
-        
+
         // Create a more detailed description based on the project type
         let detailedInfo = getProjectDetails(project);
-        
+
         return `Project: ${project.name}\n\n${detailedInfo}\n\nCurrent directory: ${currentDirectory}`;
       }
     }
-    
+
     return `cd: ${args}: No such file or directory`;
   },
-  
+
   // Other terminal commands
-  pwd: function() {
+  pwd: function () {
     return currentDirectory;
   },
-  cat: function(args = '') {
+  cat: function (args = '') {
     if (!args) {
       return "cat: missing file operand";
     }
-    
+
     // Handle absolute and relative paths
     let filePath;
     if (args.startsWith('/')) {
@@ -440,20 +421,20 @@ const responses = {
     } else {
       filePath = currentDirectory + '/' + args;
     }
-    
+
     // Normalize path
     filePath = filePath.replace(/\/+/g, '/');
-    
+
     // Check if file exists and is not hidden
     if (fileSystem[filePath] && fileSystem[filePath].type === 'file' && !fileSystem[filePath].hidden) {
       return fileSystem[filePath].content;
     }
-    
+
     return `cat: ${args}: No such file or directory`;
   },
   date: () => `Current time: ${new Date().toLocaleString()}`,
   whoami: "nir",
-  
+
   // Help command
   help: `Available commands:
 ------------------
@@ -515,7 +496,7 @@ function addTypewriterMessage(text, sender, speed = 15) {
   const messageDiv = document.createElement('div');
   messageDiv.className = `message ${sender}-message`;
   chatMessages.appendChild(messageDiv);
-  
+
   let i = 0;
   const typeWriter = () => {
     if (i < text.length) {
@@ -525,7 +506,7 @@ function addTypewriterMessage(text, sender, speed = 15) {
       setTimeout(typeWriter, speed);
     }
   };
-  
+
   typeWriter();
 }
 
@@ -631,12 +612,12 @@ async function handleUserInput() {
   } else if (lowerMessage.startsWith('cat ')) {
     const args = message.substring(4);
     localResponse = responses.cat(args);
-  } else if (lowerMessage.includes("portfolio project") || 
-             lowerMessage.includes("this website") ||
-             lowerMessage.includes("this project") ||
-             (lowerMessage.includes("portfolio") && lowerMessage.includes("chatbot")) ||
-             lowerMessage.includes("portfolio with ai")) {
-    
+  } else if (lowerMessage.includes("portfolio project") ||
+    lowerMessage.includes("this website") ||
+    lowerMessage.includes("this project") ||
+    (lowerMessage.includes("portfolio") && lowerMessage.includes("chatbot")) ||
+    lowerMessage.includes("portfolio with ai")) {
+
     const info = projectKnowledge.portfolio;
     localResponse = `Project: ${info.name}
     
@@ -655,18 +636,18 @@ What I learned: ${info.learned}`;
   // If we have a local response, display it and return
   if (localResponse) {
     addMessage(localResponse, 'bot');
-    
+
     // Update conversation history
     conversationHistory.push(
       { role: 'user', content: message },
       { role: 'assistant', content: localResponse }
     );
-    
+
     // Keep only the last 10 messages in history
     if (conversationHistory.length > 10) {
       conversationHistory = conversationHistory.slice(conversationHistory.length - 10);
     }
-    
+
     // Focus input field after response
     userInput.focus();
     return;
@@ -683,10 +664,10 @@ What I learned: ${info.learned}`;
   try {
     console.log(`Debug: Sending message to ${API_URL}`);
     console.log("Debug: Sending history:", conversationHistory);
-    
+
     // Add a small delay to show the typing animation
     await new Promise(resolve => setTimeout(resolve, 300));
-    
+
     let response;
     try {
       response = await fetch(API_URL, {
@@ -702,21 +683,21 @@ What I learned: ${info.learned}`;
       console.log(`Debug: Response status: ${response.status}`);
     } catch (fetchError) {
       console.error('Fetch Error:', fetchError);
-      
+
       // Try the alternative URL if we're in development
       if (window.location.port === '5173' || window.location.port === '3000') {
         console.log('Debug: Trying alternative URL (localhost:5000)');
-        
+
         try {
           // Remove typing indicator
           chatMessages.removeChild(typingIndicator);
-          
+
           // Add warning message
           addMessage("Trying alternative backend URL...", 'error');
-          
+
           // Re-add typing indicator
           chatMessages.appendChild(typingIndicator);
-          
+
           response = await fetch('http://localhost:8001/api/chat', {
             method: 'POST',
             headers: {
@@ -743,12 +724,12 @@ What I learned: ${info.learned}`;
     // Get the response text and try to parse it
     const responseText = await response.text();
     console.log(`Debug: Raw response: ${responseText.substring(0, 100)}...`);
-    
+
     // Check if response is empty
     if (!responseText || responseText.trim() === '') {
       throw new Error('Empty response from server');
     }
-    
+
     // Try to parse the text as JSON
     let data;
     try {
@@ -758,11 +739,11 @@ What I learned: ${info.learned}`;
       console.error('Response text:', responseText);
       throw new Error('Invalid JSON response from server');
     }
-    
+
     // Check if this is an error response
     if (data.error === true) {
       console.log(`Debug: Server returned error: ${data.error_type}`);
-      
+
       // Display the error message
       if (data.error_type === 'rate_limit') {
         // This is a rate limit error, show the time remaining
@@ -771,12 +752,12 @@ What I learned: ${info.learned}`;
         // Other types of errors
         addMessage(data.response, 'error');
       }
-      
+
       // Enable input after error
       enableInput();
       return;
     }
-    
+
     // If we don't have a proper response
     if (!data || typeof data.response !== 'string') {
       console.error('Invalid data format:', data);
@@ -785,20 +766,20 @@ What I learned: ${info.learned}`;
 
     // Add bot response to chat
     addMessage(data.response, 'bot');
-    
+
     // Update conversation history - make sure to keep only the last few messages to prevent overflow
     conversationHistory.push(
       { role: 'user', content: message },
       { role: 'assistant', content: data.response }
     );
-    
+
     // Keep only the last 10 messages in history to prevent it from growing too large
     if (conversationHistory.length > 10) {
       conversationHistory = conversationHistory.slice(conversationHistory.length - 10);
     }
-    
+
     console.log("Debug: Updated history:", conversationHistory);
-    
+
     // Enable input after successful response
     enableInput();
 
@@ -808,17 +789,17 @@ What I learned: ${info.learned}`;
     if (typingIndicator.parentNode) {
       chatMessages.removeChild(typingIndicator);
     }
-    
+
     // Add error message
     if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
       addMessage("שגיאת חיבור: אנא וודא שהשרת פועל (python app.py). נסה לרענן את הדף ולנסות שוב.", 'error');
       addMessage("לפתיחת השרת: פתח cmd, נווט לתיקית הפרוייקט והרץ `python app.py`", 'error');
     } else if (error.message.includes('JSON')) {
       addMessage("שגיאת עיבוד: התשובה מהשרת אינה בפורמט תקין. בדוק את לוג השרת.", 'error');
-    } else if (error.message.includes('Daily message limit') || 
-               error.message.includes('Too many messages') || 
-               error.message.includes('token limit') ||
-               error.message.includes('IP blocked')) {
+    } else if (error.message.includes('Daily message limit') ||
+      error.message.includes('Too many messages') ||
+      error.message.includes('token limit') ||
+      error.message.includes('IP blocked')) {
       // Extract the time information from the error message
       const timeInfo = error.message.match(/try again in (.*?)\./);
       if (timeInfo && timeInfo[1]) {
@@ -832,13 +813,13 @@ What I learned: ${info.learned}`;
       // Show user-friendly error message
       addMessage(`שגיאה: ${error.message}`, 'error');
     }
-    
+
     // Enable input after error
     enableInput();
   } finally {
     // Always focus the input field after a message is sent
     userInput.focus();
-    
+
     // For mobile: scroll to the terminal if it's not visible
     if (window.innerWidth <= 768) {
       const terminalSection = document.getElementById('terminal');
@@ -924,7 +905,7 @@ function initializeTerminal() {
     "Type 'help' for commands or ask me any question about Nir.",
     "Tip: Try: 'ls' to see all available directories"
   ];
-  
+
   // Display boot sequence with delays
   let delay = 0;
   bootMessages.forEach((msg, index) => {
@@ -934,12 +915,12 @@ function initializeTerminal() {
       } else {
         // Use typewriter effect for the last message
         addTypewriterMessage(msg, 'bot', 20);
-        
+
         // Focus input when boot sequence is complete
         setTimeout(() => bootMessages[index].length * 20 + 100);
       }
     }, delay);
-    
+
     // Increase delay for each message
     delay += (index === 0) ? 0 : 300;
   });
