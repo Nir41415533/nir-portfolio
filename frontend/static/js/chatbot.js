@@ -250,7 +250,10 @@ const responses = {
   experience: `Work Experience:\n\n${knowledgeBase.experience.map(exp => `• ${exp}`).join('\n')}`,
   projects: `Nir's portfolio projects:\n\n${knowledgeBase.projects.map(p => `• ${p.name} - ${p.description}`).join('\n')}\n\nTip: Use "cd projects" then "cd [project-name]" to see project details.`,
   contact: `Contact Information:\n\n${knowledgeBase.contact}`,
-  military: `Military Service:\n\n${knowledgeBase.experience.find(e => e.includes("Medic"))}`,
+  military: (() => {
+    const militaryExp = knowledgeBase.experience.find(e => e.role && e.role.includes("Medic"));
+    return militaryExp ? `Military Service:\n\n${militaryExp.role}\n${militaryExp.highlights}` : "No military service information available.";
+  })(),
   languages: `Languages:\n\n${knowledgeBase.languages.map(lang => `• ${lang}`).join('\n')}`,
   clear: "Terminal cleared. Ready for new commands.",
 
