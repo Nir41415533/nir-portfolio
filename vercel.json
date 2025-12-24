@@ -5,3 +5,4 @@
     { "source": "/(.*)", "destination": "/frontend/static/$1" }
   ]
 }
+
