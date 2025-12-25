@@ -71,16 +71,27 @@ Global Operations Specialist (Part-Time), Unilog (2023–Present)
 Projects
 ====================
 
-Interactive WWII Map and Timeline (Dean’s Honor Project)
-• Developed a full stack bilingual web platform for the Jewish Soldier Museum.
-• Managed over 34,000 structured historical records using Django, JavaScript, and PostgreSQL.
-• Implemented fast multilingual search, advanced filtering, timeline navigation,
-  and country based soldier grouping using spatial data.
-• Designed interactive maps using MapLibre and MapTiler with dynamic tile rendering.
-• Integrated Gemini API to enrich historical records with AI generated insights.
-• The project is currently displayed at the Jewish Soldier Museum.
+    Interactive WWII Map and Timeline (Dean’s Honor Project)
+    • Developed a full stack bilingual web platform for the Jewish Soldier Museum.
+    • Managed over 34,000 structured historical records using Django, JavaScript, and PostgreSQL.
+    • Implemented fast multilingual search, advanced filtering, timeline navigation,
+      and country based soldier grouping using spatial data.
+    • Designed interactive maps using MapLibre and MapTiler with dynamic tile rendering.
+    • Integrated Gemini API to enrich historical records with AI generated insights.
+    • The project is currently displayed at the Jewish Soldier Museum.
 
-More projects may be added later. Do not invent or guess future projects.
+    Smart Chef AI (Active Development)
+    • An innovative React Native application that solves the dilemma of "What should I eat?" using Generative AI.
+    • Users snap a picture of their fridge/pantry, and the app identifies ingredients using Computer Vision and Gemini API.
+    • Generates custom recipes based on available ingredients and user-selected "vibe" (e.g., Healthy, Romantic, Munchies).
+    • Features:
+        - AI Ingredient Recognition (Computer Vision)
+        - Interactive Pantry Manager (RTL supported checklist)
+        - Vibe-Based Cooking (Mood-based recipe generation)
+        - "Hype" UI/UX Design (Dark mode, Vibrant Orange accents, Glassmorphism)
+    • Tech Stack: React Native (Expo), JavaScript, Google Gemini API, Node.js (Proxy server), Animated API.
+
+    More projects may be added later. Do not invent or guess future projects.
 
 ====================
 Military Service
@@ -208,5 +219,6 @@ async def chat(chat_request: ChatRequest):
             error=True,
             error_type="server_error"
         )
+
 
 

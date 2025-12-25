@@ -235,5 +235,128 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Project Modal Functionality
+const projectsData = {
+  'wwii-map': {
+    title: 'Interactive WWII Map & Timeline',
+    image: 'images/WW2_image.png',
+    tags: ['Django', 'JavaScript', 'PostgreSQL', 'MapLibre', 'MapTiler', 'Gemini API'],
+    description: `
+      <p><strong>🏆 Awarded Dean's Honor Project</strong></p>
+      <p>Developed a comprehensive full-stack bilingual web platform for the Jewish Soldier Museum, designed to honor and preserve the history of Jewish soldiers who served in World War II.</p>
+      
+      <h3 style="color: var(--primary-color); margin-top: 20px;">Key Features:</h3>
+      <ul style="line-height: 2;">
+        <li><strong>Massive Dataset Management:</strong> Managing over 34,000 structured historical records with optimized multilingual search capabilities (Hebrew & English)</li>
+        <li><strong>Interactive Mapping:</strong> Designed dynamic map layers using MapLibre and MapTiler with real-time rendering and smooth transitions</li>
+        <li><strong>AI Integration:</strong> Integrated Gemini API to enrich historical records with AI-generated insights and contextual information</li>
+        <li><strong>Advanced Features:</strong> Timeline navigation, country-based soldier grouping, spatial data filtering, and advanced search algorithms</li>
+        <li><strong>Performance:</strong> Optimized database queries and implemented caching strategies for fast multilingual search across 34k+ records</li>
+      </ul>
+      
+      <h3 style="color: var(--primary-color); margin-top: 20px;">Technical Stack:</h3>
+      <ul style="line-height: 2;">
+        <li><strong>Backend:</strong> Django (Python) with PostgreSQL database</li>
+        <li><strong>Frontend:</strong> JavaScript, HTML5, CSS3</li>
+        <li><strong>Mapping:</strong> MapLibre GL JS, MapTiler, GeoJSON</li>
+        <li><strong>AI:</strong> Google Gemini API for content enrichment</li>
+        <li><strong>Deployment:</strong> Docker, AWS</li>
+      </ul>
+      
+      <p style="margin-top: 20px;"><strong>Current Status:</strong> Currently displayed at the Jewish Soldier Museum, serving as an educational tool for visitors.</p>
+    `,
+    link: 'https://drive.google.com/file/d/1OMX0xA1SwPvKojZ7UCjImVCnOtqHMref/view?usp=sharing'
+  },
+  'smart-chef-ai': {
+    title: '👨‍🍳 Smart Chef AI',
+    image: 'images/Smart-chef.jpeg',
+    tags: ['React Native', 'Expo', 'JavaScript', 'Gemini API', 'Node.js', 'Computer Vision'],
+    description: `
+      <p><strong>Smart Chef AI is an innovative React Native application designed to solve the daily dilemma of "What should I eat?" by leveraging the power of Generative AI.</strong></p>
+      
+      <h3 style="color: var(--primary-color); margin-top: 20px;">🚀 Project Overview</h3>
+      <p>The app serves as a smart kitchen assistant. Users simply take a picture of their available ingredients, and the system uses computer vision and AI (Gemini) to identify the items. After verifying the ingredients and selecting a desired culinary "vibe" (e.g., Healthy, Romantic, Comfort Food), the app generates custom-tailored recipes instantly.</p>
+      
+      <h3 style="color: var(--primary-color); margin-top: 20px;">✨ Key Features:</h3>
+      <ul style="line-height: 2;">
+        <li><strong>📸 AI Ingredient Recognition:</strong> Users can upload a photo or snap a picture of their fridge. The app analyzes the image to automatically detect and list available ingredients.</li>
+        <li><strong>✅ Interactive Pantry Manager:</strong> A sleek, checklist-style interface (RTL supported) allows users to easily confirm, add, or remove ingredients before cooking.</li>
+        <li><strong>🎨 Vibe-Based Cooking:</strong> Instead of generic filters, users select a cooking style based on their mood (e.g., Quick & Easy, Gourmet, Late Night Munchies).</li>
+        <li><strong>🤖 Generative Recipe Engine:</strong> Utilizing advanced AI, the app creates unique, step-by-step recipes based only on the ingredients the user actually has.</li>
+        <li><strong>📱 "Hype" UI/UX Design:</strong> Modern, high-energy aesthetic targeting Gen Z, utilizing Dark Mode with Vibrant Orange (#FF5500) accents, Glassmorphism effects, and smooth animations.</li>
+      </ul>
+      
+      <h3 style="color: var(--primary-color); margin-top: 20px;">🛠️ Tech Stack:</h3>
+      <ul style="line-height: 2;">
+        <li><strong>Frontend:</strong> React Native (Expo)</li>
+        <li><strong>Language:</strong> JavaScript</li>
+        <li><strong>AI Integration:</strong> Google Gemini API (image recognition and recipe generation)</li>
+        <li><strong>Styling:</strong> Custom StyleSheet with centralized Theme System</li>
+        <li><strong>Animations:</strong> React Native Animated API for fluid transitions</li>
+        <li><strong>Backend:</strong> Node.js proxy server for API security</li>
+      </ul>
+      
+      <p style="margin-top: 20px;"><strong>🎯 Current Status:</strong> In active development. Recent updates include complete UI overhaul to "Hype" design language, asset optimization (PNG to JPG conversion), and smart checklist interaction for ingredient management.</p>
+    `,
+    link: 'https://drive.google.com/file/d/10G79xATkujdk2TPTTZAsN0fDHp9X-Ys-/view?usp=sharing'
+  }
+};
+
+let currentProjectLink = ''; // Store current project link globally
+
+function openProjectModal(projectId) {
+  const modal = document.getElementById('project-modal');
+  const project = projectsData[projectId];
+  
+  if (!project) return;
+  
+  // Store project link globally for image click
+  currentProjectLink = project.link;
+  
+  // Update modal content
+  document.getElementById('modal-title').textContent = project.title;
+  document.getElementById('modal-image').src = project.image;
+  document.getElementById('modal-image').alt = project.title;
+  document.getElementById('modal-description').innerHTML = project.description;
+  document.getElementById('modal-link').href = project.link;
+  
+  // Update tags
+  const tagsContainer = document.getElementById('modal-tags');
+  tagsContainer.innerHTML = '';
+  project.tags.forEach(tag => {
+    const tagElement = document.createElement('span');
+    tagElement.className = 'modal-tag';
+    tagElement.textContent = tag;
+    tagsContainer.appendChild(tagElement);
+  });
+  
+  // Show modal
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function openProjectLink() {
+  if (currentProjectLink) {
+    window.open(currentProjectLink, '_blank');
+  }
+}
+
+function closeProjectModal(event) {
+  const modal = document.getElementById('project-modal');
+  
+  // Close only if clicking on backdrop or close button
+  if (!event || event.target === modal || event.type === 'click') {
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+  }
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeProjectModal();
+  }
+});
+
 // Initialize theme on page load
 document.addEventListener("DOMContentLoaded", initializeTheme); 

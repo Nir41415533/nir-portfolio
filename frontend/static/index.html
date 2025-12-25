@@ -1468,11 +1468,11 @@
       <div class="project">
         <a href="https://drive.google.com/file/d/1OMX0xA1SwPvKojZ7UCjImVCnOtqHMref/view?usp=sharing" target="_blank" class="project-img-container" style="display: block;">
           <img
-  src="images/WW2_image.png"
-  alt="WWII Interactive Map"
-  class="project-img"
-  onerror="this.onerror=null; this.src='https://drive.google.com/uc?export=view&id=1OMX0xA1SwPvKojZ7UCjImVCnOtqHMref';"
-/>
+            src="images/WW2_image.png"
+            alt="WWII Interactive Map"
+            class="project-img"
+            onerror="this.onerror=null; this.src='https://drive.google.com/uc?export=view&id=1OMX0xA1SwPvKojZ7UCjImVCnOtqHMref';"
+          />
           <div class="img-overlay">
             <span><i class="fas fa-eye"></i> View Project</span>
           </div>
@@ -1487,13 +1487,74 @@
             <span class="project-tag">Gemini API</span>
           </div>
           <p>
-            Awarded Dean’s Honor Project. Developed a full-stack bilingual platform for the Jewish Soldier Museum, managing 34k+ records with optimized multilingual search. The system features interactive maps built with MapLibre and MapTiler, dynamic rendering, and AI-enriched data via Gemini API, alongside advanced spatial filtering and timeline navigation.
-            <strong>Awarded Dean’s Honor Project.</strong>
+            Awarded Dean's Honor Project. Developed a full-stack bilingual platform for the Jewish Soldier Museum, managing 34k+ records with optimized multilingual search. The system features interactive maps built with MapLibre and MapTiler, dynamic rendering, and AI-enriched data via Gemini API, alongside advanced spatial filtering and timeline navigation.
           </p>
+          <button class="view-details-btn" onclick="openProjectModal('wwii-map')">
+            <i class="fas fa-info-circle"></i> View Details
+          </button>
+        </div>
+      </div>
+
+      <!-- Project 2: Smart Chef AI -->
+      <div class="project">
+        <a href="https://drive.google.com/file/d/10G79xATkujdk2TPTTZAsN0fDHp9X-Ys-/view?usp=sharing" target="_blank" class="project-img-container iphone-wrapper" style="display: flex;">
+          <div class="iphone-frame">
+            <div class="iphone-notch"></div>
+            <img
+              src="images/Smart-chef.jpeg"
+              alt="Smart Chef AI"
+              class="iphone-screen-img"
+              onerror="this.src='https://via.placeholder.com/300x600?text=App+Screenshot'"
+            />
+            <div class="iphone-overlay">
+              <span><i class="fas fa-mobile-alt"></i> View Demo</span>
+            </div>
+          </div>
+        </a>
+        <div class="project-content">
+          <h3> Smart Chef AI</h3>
+          <div class="project-tags">
+            <span class="project-tag">React Native</span>
+            <span class="project-tag">Expo</span>
+            <span class="project-tag">Gemini API</span>
+            <span class="project-tag">Node.js</span>
+            <span class="project-tag">Computer Vision</span>
+          </div>
+          <p>
+            An innovative React Native mobile app that solves "What should I eat?" using AI. Snap a photo of your fridge, and the app identifies ingredients using computer vision, then generates personalized recipes based on your mood and available ingredients. Features a modern "Hype" UI with Dark Mode and vibrant design.
+          </p>
+          <button class="view-details-btn" onclick="openProjectModal('smart-chef-ai')">
+            <i class="fas fa-info-circle"></i> View Details
+          </button>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Project Modal -->
+  <div id="project-modal" class="project-modal" onclick="closeProjectModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title"></h2>
+        <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-wrapper" id="modal-image-wrapper">
+          <img id="modal-image" class="modal-image" src="" alt="" onclick="openProjectLink()">
+          <div class="modal-image-overlay">
+            <span class="modal-image-text">
+              <i class="fas fa-external-link-alt"></i> Click to View Project
+            </span>
+          </div>
+        </div>
+        <div id="modal-tags" class="modal-tags"></div>
+        <div id="modal-description" class="modal-description"></div>
+        <button id="modal-link" class="modal-link" onclick="openProjectLink()">
+          <i class="fas fa-external-link-alt"></i> View Live Project
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Contact Section -->
   <section id="contact" class="section">
