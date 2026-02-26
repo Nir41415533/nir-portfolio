@@ -230,6 +230,16 @@ Technologies used: Python, Abstract Syntax Trees, Interpreter Design Patterns, P
 
 Technologies used: Python, Cryptography libraries, SQLite for local storage`;
   }
+  else if (project.name.includes('Smart Chef AI')) {
+    detailedInfo = `A React Native application that solves the dilemma of "What should I eat?" using Generative AI.
+Features include:
+• AI Ingredient Recognition (Computer Vision)
+• Interactive Pantry Manager (RTL supported checklist)
+• Vibe-Based Cooking (Mood-based recipe generation)
+• "Hype" UI/UX Design (Dark mode, Vibrant Orange accents, Glassmorphism)
+
+Technologies used: React Native, JavaScript, Google Gemini API, Node.js (Proxy server), Animated API`;
+  }
   else {
     // Generic detailed description for other projects
     detailedInfo = `${project.description}\n\nThis project demonstrates Nir's skills in software development and problem-solving.`;

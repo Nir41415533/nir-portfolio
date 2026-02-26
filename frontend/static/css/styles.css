@@ -73,6 +73,8 @@ header h1 {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 20px;
+  min-height: 2.5em;
+  line-height: 1.25;
   animation: fadeInDown 1s ease-in-out;
   z-index: 1;
 }
@@ -890,6 +892,7 @@ footer {
     margin-top: 20px;
     margin-bottom: 15px;
     line-height: 1.4;
+    min-height: 2.6em;
     padding: 0 10px;
     min-height: 90px;
     display: flex;
