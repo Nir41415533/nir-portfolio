@@ -6,11 +6,15 @@ if (typeof typed === 'undefined') {
             "Nir Ohayon",
         // שילוב הטייטל הנוכחי שלך עם השאיפות
         // הדגשת הסטאק החזק ביותר שלך (מה שיש לך ניסיון מוכח בו)
-        "React Native ,JavaScript ,Python",
+        "Mobile and Full Stack Developer",
         // הדגשת הניסיון המיוחד שלך באינטגרציות AI
         // התואר וההישגים
-        "B.Sc. Computer Science Graduate ",
-        "Full Stack and a Mobile Developer",
+        "Computer Science Graduate",
+        "Strong Problem Solving Abilities",
+        
+
+
+        
     
         // במקום "לומד מהר", משהו שמעיד על תשוקה לטכנולוגיה ופתרון בעיות
 
